@@ -41,8 +41,11 @@ namespace WaveAnalyzerCommon
             {
                 if (new FileInfo(imagePath).Length == 0) continue;
 
-                result.Update(mImageAnalyzer.AnalyzeImage(imagePath), imagePath);
+                float analysisResult = mImageAnalyzer.AnalyzeImage(imagePath);
+                result.Update(analysisResult, imagePath);
             }
+
+            Directory.Delete(imageFolder, true);
 
             return result;
         }

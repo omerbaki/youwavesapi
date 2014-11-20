@@ -17,14 +17,16 @@ namespace WaveAnalyzerCommon
     public abstract class ImageAnalyzer : IImageAnalyzer
     {
         public float AnalyzeImage(string imagePath)
-        {            
-            var bitmap = new Bitmap(imagePath);
-            var relevantArea = GetRelevantArea();
+        {
+            using (var bitmap = new Bitmap(imagePath))
+            {
+                var relevantArea = GetRelevantArea();
 
-            var totalPixelsCount = GetTotalPixelSize(relevantArea);
-            var markedPixelsCount = GetMarkedPixelCount(bitmap, relevantArea);
+                var totalPixelsCount = GetTotalPixelSize(relevantArea);
+                var markedPixelsCount = GetMarkedPixelCount(bitmap, relevantArea);
 
-            return (float)markedPixelsCount / totalPixelsCount;
+                return (float)markedPixelsCount / totalPixelsCount;
+            }
         }
 
         protected abstract Rectangle GetRelevantArea();

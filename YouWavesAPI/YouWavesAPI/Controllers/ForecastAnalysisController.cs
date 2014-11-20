@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace YouWavesAPI.Controllers
@@ -18,9 +19,9 @@ namespace YouWavesAPI.Controllers
         }
 
         // POST: api/ForecastAnalysis
-        public void Post()
+        public async Task Post()
         {
-            //Task.FromResult(CreateReports());
+            await mForecastAnalysisReportCreator.CreateReports();
         }        
     }
 }
