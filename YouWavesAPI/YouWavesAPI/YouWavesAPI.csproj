@@ -39,6 +39,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -77,10 +86,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ForecastAnalysisController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnityResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -93,8 +104,33 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ForecastAnalysisReportCreator\ForecastAnalysisReportCreator.csproj">
+      <Project>{6e450b02-e4e8-45fb-9cf3-67cabe8b3f3c}</Project>
+      <Name>ForecastAnalysisReportCreator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisResultEntities.csproj">
+      <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
+      <Name>ForecastAnalysisResultEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ForecastWaveAnalyzers\IsramarWaveAnalyzer\IsramarWaveAnalyzer.csproj">
+      <Project>{eadfaf2c-d9b3-430d-85a8-f2df7a0b367a}</Project>
+      <Name>IsramarWaveAnalyzer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ForecastWaveAnalyzers\WaveAnalyzerCommon\WaveAnalyzerCommon.csproj">
+      <Project>{042d3990-5db5-46eb-8f85-9d0d4a95fa43}</Project>
+      <Name>WaveAnalyzerCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ForecastWaveAnalyzers\WindAlertWaveAnalyzer\WindAlertWaveAnalyzer.csproj">
+      <Project>{5b8ec848-d47b-4f84-8792-137d6d8b3dd5}</Project>
+      <Name>WindAlertWaveAnalyzer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{51a6a9ca-9a64-45fb-b649-69b00aebfa15}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
