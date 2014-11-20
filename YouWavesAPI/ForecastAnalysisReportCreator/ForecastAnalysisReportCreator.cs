@@ -16,13 +16,16 @@ namespace ForecastAnalysisReport
 
     class ForecastAnalysisReportCreator : IForecastAnalysisReportCreator
     {
+        private readonly ILogger mLogger; 
         private readonly IJsonSerializer mJsonSerializer;
         private readonly IEnumerable<IWaveAnalyzer> mWaveAnalyzers;
 
         public ForecastAnalysisReportCreator(
+            ILogger aLogger, 
             IEnumerable<IWaveAnalyzer> aWaveAnalyzers,
             IJsonSerializer aJsonSerializer)
         {
+            mLogger = aLogger;
             mWaveAnalyzers = aWaveAnalyzers;
             mJsonSerializer = aJsonSerializer;
         }
@@ -33,9 +36,12 @@ namespace ForecastAnalysisReport
 
             foreach (var waveAnalyzer in mWaveAnalyzers)
             {
+                Exception exThrown = null;
                 try
                 {
                     if (!waveAnalyzer.ShouldRun()) continue;
+
+                    await mLogger.Debug("ForecastAnalysisReportCreator", "Running waveAnalyzer " + waveAnalyzer.GetType().Name);
 
                     var waveAnalysisResult = await waveAnalyzer.Analyze();
 
@@ -46,10 +52,17 @@ namespace ForecastAnalysisReport
                 }
                 catch (Exception ex)
                 {
-                    //mLogger.Error(ex);
+                    exThrown = ex;                                       
                 }
-            }
-            
+
+                if (exThrown != null)
+                {
+                    await mLogger.Error(
+                            "ForecastAnalysisReportCreator",
+                            "Failed to run analyzer " + waveAnalyzer.GetType().Name,
+                            exThrown);
+                }
+            }            
         }
 
         private string CreateReportDirectory()

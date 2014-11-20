@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="FrameworkExtendedContainer.cs" />
     <Compile Include="JsonSerializer.cs" />
+    <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
