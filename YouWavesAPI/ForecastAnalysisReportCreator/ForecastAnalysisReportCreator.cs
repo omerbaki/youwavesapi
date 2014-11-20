@@ -61,6 +61,8 @@ namespace ForecastAnalysisReport
                             "ForecastAnalysisReportCreator",
                             "Failed to run analyzer " + waveAnalyzer.GetType().Name,
                             exThrown);
+
+                    exThrown = null;
                 }
             }            
         }
