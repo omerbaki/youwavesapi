@@ -11,7 +11,7 @@ namespace ForecastAnalysisNotificationCreator
     {
         protected override void Initialize()
         {
-            Container.RegisterType<IWaveForecastNotificationCreator, WaveForecastNotificationCreator>();
+            Container.RegisterType<IForecastNotificationCreator, ForecastNotificationCreator>();
         }
     }
 }

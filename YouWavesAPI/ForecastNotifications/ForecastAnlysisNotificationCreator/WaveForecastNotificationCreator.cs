@@ -1,4 +1,5 @@
-﻿using ForecastAnalysisResultEntities;
+﻿using ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators;
+using ForecastAnalysisResultEntities;
 using ForecastNotificaitonEntities;
 using Framework;
 using Newtonsoft.Json;
@@ -12,39 +13,55 @@ using System.Threading.Tasks;
 
 namespace ForecastAnalysisNotificationCreator
 {
-    public interface IWaveForecastNotificationCreator
+    public interface IForecastNotificationCreator
     {
-        Task CreateNotification();
+        Task CreateNotification(string reportsDirectory);
     }
 
-    public class WaveForecastNotificationCreator : IWaveForecastNotificationCreator
+    public class ForecastNotificationCreator : IForecastNotificationCreator
     {
+        private readonly ILogger mLogger; 
         private IJsonSerializer mJsonSerializer;
+        private readonly IEnumerable<IWaveForecastNotificationCreator> mWaveForecastNotificationCreators;
 
-        public WaveForecastNotificationCreator(IJsonSerializer jsonSerializer)
+        public ForecastNotificationCreator(
+            ILogger aLogger,
+            IJsonSerializer jsonSerializer,
+            IEnumerable<IWaveForecastNotificationCreator> waveForecastNotificationCreators)
         {
+            mLogger = aLogger;            
             mJsonSerializer = jsonSerializer;
+            mWaveForecastNotificationCreators = waveForecastNotificationCreators;
         }
 
-        public async Task CreateNotification()
+        public async Task CreateNotification(string reportsDirectory)
         {
-            string reportsDirectory = Path.Combine("Reports", DateTime.Now.ToString("yyyyMMdd"));
-            string[] isramarAnalysisResults = Directory.GetFiles(reportsDirectory, typeof(IsramarWaveAnalysisResult).Name + "*");
-            if (isramarAnalysisResults.Length == 0) return;
-
-            var waveForecastNotification = new WaveForecastNotification();
-
-            var isramarWaveAnalysisResult = 
-                (await mJsonSerializer.Import(isramarAnalysisResults[0], typeof(IsramarWaveAnalysisResult))) 
-                as IsramarWaveAnalysisResult;            
-            waveForecastNotification.IsramarStartDate = isramarWaveAnalysisResult.StartDate;
-            waveForecastNotification.IsramarEndDate = isramarWaveAnalysisResult.EndDate;
-
             string notificationsDirectory = CreateNotificationsDirectory();
-            string reportFileName =
-                Path.Combine(notificationsDirectory, typeof(WaveForecastNotification).Name + "_" + DateTime.Now.ToString("yyyyMMdd_HHmm") + ".json");
+
+            await CreateWavesForecastNotification(reportsDirectory, notificationsDirectory);
+        }
+
+        private async Task CreateWavesForecastNotification(string reportsDirectory, string notificationsDirectory)
+        {  
+            var waveForecastNotification = new WaveForecastNotificationModel();
+
+            foreach (var waveForecastNotificationCreator in mWaveForecastNotificationCreators)
+            {
+                await waveForecastNotificationCreator.UpdateWaveForecastNotification(
+                        reportsDirectory, 
+                        waveForecastNotification);               
+            }
+
+            string reportFileName = CreateWaveForecastNotificationFileName(notificationsDirectory);                  
 
             await mJsonSerializer.Export(reportFileName, waveForecastNotification);
+        }
+
+        private string CreateWaveForecastNotificationFileName(string notificationsDirectory)
+        {
+            return Path.Combine(
+                        notificationsDirectory,
+                        typeof(WaveForecastNotificationModel).Name + "_" + DateTime.Now.ToString("yyyyMMdd") + ".json");
         }
 
         private string CreateNotificationsDirectory()
@@ -58,5 +75,8 @@ namespace ForecastAnalysisNotificationCreator
 
             return directory;
         }
+
+
+      
     }
 }

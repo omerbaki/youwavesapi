@@ -27,7 +27,7 @@ namespace YouWavesAPI.Controllers
         public async Task Post()
         {
             await mLogger.Debug("ForecastAnalysisController", "Create Reports");
-            await mForecastAnalysisReportCreator.CreateReports();
+            string reportsDirectory = await mForecastAnalysisReportCreator.CreateReports();
 
             await mLogger.Debug("ForecastAnalysisController", "Create Notification");
             //await mForecastAnalysisReportCreator.CreateReports();

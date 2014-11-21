@@ -26,10 +26,10 @@ namespace ForecastNotificationSender
         public async Task<EmailModel> GetEmailFormat()
         {
             var notificationsDirectory = Path.Combine("Notifications", DateTime.Now.ToString("yyyyMMdd"));
-            string[] waveForecastNotifications = Directory.GetFiles(notificationsDirectory, typeof(WaveForecastNotification).Name + "*");
+            string[] waveForecastNotifications = Directory.GetFiles(notificationsDirectory, typeof(WaveForecastNotificationModel).Name + "*");
             var waveForecastNotification =
-               (await mJsonSerializer.Import(waveForecastNotifications[0], typeof(WaveForecastNotification)))
-               as WaveForecastNotification;
+               (await mJsonSerializer.Import(waveForecastNotifications[0], typeof(WaveForecastNotificationModel)))
+               as WaveForecastNotificationModel;
 
             var emailModel = new EmailModel();
             if(waveForecastNotification.IsramarStartDate == default(DateTime))

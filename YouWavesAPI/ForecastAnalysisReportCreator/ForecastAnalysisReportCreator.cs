@@ -11,7 +11,7 @@ namespace ForecastAnalysisReport
 {
     public interface IForecastAnalysisReportCreator
     {
-        Task CreateReports();        
+        Task<string> CreateReports();        
     }
 
     class ForecastAnalysisReportCreator : IForecastAnalysisReportCreator
@@ -30,7 +30,7 @@ namespace ForecastAnalysisReport
             mJsonSerializer = aJsonSerializer;
         }
 
-        public async Task CreateReports()
+        public async Task<string> CreateReports()
         {
             string directory = CreateReportDirectory();
 
@@ -64,12 +64,14 @@ namespace ForecastAnalysisReport
 
                     exThrown = null;
                 }
-            }            
+            }
+
+            return directory;
         }
 
         private string CreateReportDirectory()
         {
-            string directory = Path.Combine("Reports", DateTime.Now.ToString("yyyyMMdd"));
+            string directory = Path.Combine("Reports", DateTime.Now.ToString("yyyyMMdd_HHmm"));
 
             if (!Directory.Exists(directory))
             {

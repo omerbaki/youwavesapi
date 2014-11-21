@@ -56,9 +56,11 @@
     <Compile Include="ForecastAnlysisNotificationCreatorExtendedContainer.cs" />
     <Compile Include="WaveForecastNotificationCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WaveForecastNotificationCreators\IsramarWaveForecastNotificationCreator.cs" />
+    <Compile Include="WaveForecastNotificationCreators\IWaveForecastNotificationCreator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ForecastAnalysisResult\ForecastAnalysisResultEntities.csproj">
+    <ProjectReference Include="..\..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisResultEntities.csproj">
       <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
       <Name>ForecastAnalysisResultEntities</Name>
     </ProjectReference>
@@ -66,7 +68,7 @@
       <Project>{c3e1120b-0102-4d44-862e-0c78c8454257}</Project>
       <Name>ForecastNotificaitonEntities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Framework\Framework.csproj">
+    <ProjectReference Include="..\..\Framework\Framework.csproj">
       <Project>{51a6a9ca-9a64-45fb-b649-69b00aebfa15}</Project>
       <Name>Framework</Name>
     </ProjectReference>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ForecastNotificaitonEntities
 {
-    public class WaveForecastNotification
+    public class WaveForecastNotificationModel
     {
         public DateTime IsramarStartDate { get; set; }
 
