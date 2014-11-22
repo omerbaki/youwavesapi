@@ -15,56 +15,55 @@ namespace ForecastAnalysisNotificationCreator
 {
     public interface IForecastNotificationCreator
     {
-        Task CreateNotification(string reportsDirectory);
+        Task CreateNotifications(string reportsDirectory);
     }
 
     public class ForecastNotificationCreator : IForecastNotificationCreator
     {
         private readonly ILogger mLogger; 
-        private IJsonSerializer mJsonSerializer;
-        private readonly IEnumerable<IWaveForecastNotificationCreator> mWaveForecastNotificationCreators;
+        private readonly IJsonSerializer mJsonSerializer;
+        private readonly IWaveForecastNotificationCreatorFactory mWaveForecastNotificationCreatorFactory; 
 
         public ForecastNotificationCreator(
             ILogger aLogger,
             IJsonSerializer jsonSerializer,
-            IEnumerable<IWaveForecastNotificationCreator> waveForecastNotificationCreators)
+            IWaveForecastNotificationCreatorFactory aWaveForecastNotificationCreatorFactory)
         {
             mLogger = aLogger;            
             mJsonSerializer = jsonSerializer;
-            mWaveForecastNotificationCreators = waveForecastNotificationCreators;
+            mWaveForecastNotificationCreatorFactory = aWaveForecastNotificationCreatorFactory;
         }
 
-        public async Task CreateNotification(string reportsDirectory)
+        public async Task CreateNotifications(string reportsDirectory)
         {
-            string notificationsDirectory = CreateNotificationsDirectory();
-
-            await CreateWavesForecastNotification(reportsDirectory, notificationsDirectory);
-        }
-
-        private async Task CreateWavesForecastNotification(string reportsDirectory, string notificationsDirectory)
-        {  
-            var waveForecastNotification = new WaveForecastNotificationModel();
-
-            foreach (var waveForecastNotificationCreator in mWaveForecastNotificationCreators)
+            Exception exThrown = null;
+            try
             {
-                await waveForecastNotificationCreator.UpdateWaveForecastNotification(
-                        reportsDirectory, 
-                        waveForecastNotification);               
+                string[] analysisResults = Directory.GetFiles(reportsDirectory);
+                if (analysisResults.Length == 0) return;
+
+                string notificationsDirectory = CreateDailyNotificationsDirectory();
+
+                foreach (var analysisResult in analysisResults)
+                {
+                    var notificationCreator = GetWaveForecastNotificationCreator(analysisResult);
+                    await notificationCreator.UpdateWaveForecastNotification(notificationsDirectory);
+                }              
+            }
+            catch(Exception ex)
+            {
+                exThrown = ex;                
             }
 
-            string reportFileName = CreateWaveForecastNotificationFileName(notificationsDirectory);                  
+            await mLogger.Error("ForecastNotificationCreator", "Failed to create notifications", exThrown);
+        }        
 
-            await mJsonSerializer.Export(reportFileName, waveForecastNotification);
-        }
-
-        private string CreateWaveForecastNotificationFileName(string notificationsDirectory)
+        private IWaveForecastNotificationCreator GetWaveForecastNotificationCreator(string analysisResult)
         {
-            return Path.Combine(
-                        notificationsDirectory,
-                        typeof(WaveForecastNotificationModel).Name + "_" + DateTime.Now.ToString("yyyyMMdd") + ".json");
+            return mWaveForecastNotificationCreatorFactory.Create(typeof(IsramarWaveAnalysisResult).Name);           
         }
 
-        private string CreateNotificationsDirectory()
+        private string CreateDailyNotificationsDirectory()
         {
             string directory = Path.Combine("Notifications", DateTime.Now.ToString("yyyyMMdd"));
 

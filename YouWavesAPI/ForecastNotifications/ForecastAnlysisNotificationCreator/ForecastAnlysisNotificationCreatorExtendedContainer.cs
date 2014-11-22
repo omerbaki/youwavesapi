@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,10 @@ namespace ForecastAnalysisNotificationCreator
     {
         protected override void Initialize()
         {
+            Container.RegisterType<IWaveForecastNotificationCreatorFactory, WaveForecastNotificationCreatorFactory>();
             Container.RegisterType<IForecastNotificationCreator, ForecastNotificationCreator>();
+
+            Container.RegisterType<IWaveForecastNotificationCreator, IsramarWaveForecastNotificationCreator>(typeof(IsramarWaveAnalysisResult).Name);
         }
     }
 }

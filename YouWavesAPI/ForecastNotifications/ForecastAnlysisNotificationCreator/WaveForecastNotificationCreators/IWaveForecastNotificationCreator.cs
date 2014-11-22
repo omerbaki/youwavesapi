@@ -10,7 +10,6 @@ namespace ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators
     public interface IWaveForecastNotificationCreator
     {
         Task UpdateWaveForecastNotification(
-            string reportsDirectory, 
-            WaveForecastNotificationModel waveForecastNotification);
+            string reportsDirectory);
     }
 }

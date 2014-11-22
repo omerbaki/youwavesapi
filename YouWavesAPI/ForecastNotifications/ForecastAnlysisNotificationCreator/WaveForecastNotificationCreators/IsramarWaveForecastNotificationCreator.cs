@@ -19,8 +19,12 @@ namespace ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators
             mJsonSerializer = jsonSerializer;
         }
 
-        public async Task UpdateWaveForecastNotification(string reportsDirectory, WaveForecastNotificationModel waveForecastNotification)
+        public async Task UpdateWaveForecastNotification(string reportsDirectory, string notificationsDirectory)
         {
+            string reportFileName = CreateWaveForecastNotificationFileName(notificationsDirectory);
+            var waveForecastNotification = await GetWaveForecastNotificationModel(reportFileName);
+
+            //Directory.GetFiles(reportsDirectory, typeof(IsramarWaveAnalysisResult).Name + "*");
             string[] analysisResults = Directory.GetFiles(reportsDirectory, typeof(IsramarWaveAnalysisResult).Name + "*");
             if (analysisResults.Length == 0) return;
 
@@ -30,6 +34,32 @@ namespace ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators
 
             waveForecastNotification.IsramarStartDate = isramarWaveAnalysisResult.StartDate;
             waveForecastNotification.IsramarEndDate = isramarWaveAnalysisResult.EndDate;
+        }
+
+        private string CreateWaveForecastNotificationFileName(string notificationsDirectory)
+        {
+            return Path.Combine(
+                        notificationsDirectory,
+                        typeof(WaveForecastNotificationModel).Name + "_" + DateTime.Now.ToString("yyyyMMdd") + ".json");
+        }
+
+        private async Task<WaveForecastNotificationModel> GetWaveForecastNotificationModel(string reportFileName)
+        {
+            var isramarWaveAnalysisResult =
+                (await mJsonSerializer.Import(reportFileName, typeof(WaveForecastNotificationModel)))
+                as WaveForecastNotificationModel;
+
+            if(isramarWaveAnalysisResult == null)
+            {
+                isramarWaveAnalysisResult = new WaveForecastNotificationModel();
+            }
+
+            return isramarWaveAnalysisResult;
+        }
+
+        private async Task CreateWavesForecastNotification(string reportsDirectory, string notificationsDirectory)
+        {
+            await mJsonSerializer.Export(reportFileName, waveForecastNotification);
         }
     }
 }
