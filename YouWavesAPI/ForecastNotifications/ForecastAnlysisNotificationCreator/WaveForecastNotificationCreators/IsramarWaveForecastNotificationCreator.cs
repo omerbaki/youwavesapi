@@ -46,14 +46,14 @@ namespace ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators
 
         private async Task<WaveForecastNotificationModel> GetWaveForecastNotificationModel(string reportFileName, string notificationsDirectory)
         {
+            if (!File.Exists(reportFileName))
+            {
+                return new WaveForecastNotificationModel();
+            }
+
             var isramarWaveAnalysisResult =
                 (await mJsonSerializer.Import(reportFileName, typeof(WaveForecastNotificationModel)))
-                as WaveForecastNotificationModel;
-
-            if(isramarWaveAnalysisResult == null)
-            {
-                isramarWaveAnalysisResult = new WaveForecastNotificationModel();
-            }
+                as WaveForecastNotificationModel;          
 
             return isramarWaveAnalysisResult;
         }      
