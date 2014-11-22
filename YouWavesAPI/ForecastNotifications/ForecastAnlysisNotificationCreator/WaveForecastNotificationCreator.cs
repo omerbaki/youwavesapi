@@ -39,6 +39,8 @@ namespace ForecastAnalysisNotificationCreator
             Exception exThrown = null;
             try
             {
+                string processedDirectory = reportsDirectory + "_Processed";
+
                 string[] analysisResults = Directory.GetFiles(reportsDirectory);
                 if (analysisResults.Length == 0) return;
 
@@ -47,7 +49,9 @@ namespace ForecastAnalysisNotificationCreator
                 foreach (var analysisResult in analysisResults)
                 {
                     var notificationCreator = GetWaveForecastNotificationCreator(analysisResult);
-                    await notificationCreator.UpdateWaveForecastNotification(notificationsDirectory);
+                    await notificationCreator.UpdateWaveForecastNotification(reportsDirectory, notificationsDirectory);
+
+                    File.Move(analysisResult, processedDirectory);
                 }              
             }
             catch(Exception ex)

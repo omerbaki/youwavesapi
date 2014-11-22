@@ -1,4 +1,5 @@
 ﻿using ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators;
+using ForecastAnalysisResultEntities;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;

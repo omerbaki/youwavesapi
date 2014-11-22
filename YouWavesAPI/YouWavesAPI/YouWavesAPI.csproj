@@ -113,6 +113,18 @@
       <Project>{6e450b02-e4e8-45fb-9cf3-67cabe8b3f3c}</Project>
       <Name>ForecastAnalysisReportCreator</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ForecastNotifications\ForecastAnlysisNotificationCreator\ForecastAnalysisNotificationCreator.csproj">
+      <Project>{1a0b05ac-fa4c-49c1-a87f-6ae51217a7fe}</Project>
+      <Name>ForecastAnalysisNotificationCreator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ForecastNotifications\ForecastNotificaitonEntities\ForecastNotificaitonEntities.csproj">
+      <Project>{c3e1120b-0102-4d44-862e-0c78c8454257}</Project>
+      <Name>ForecastNotificaitonEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ForecastNotifications\ForecastNotificationSender\ForecastNotificationSender.csproj">
+      <Project>{891d89fa-08e3-4ed4-b413-34742bd88c6b}</Project>
+      <Name>ForecastNotificationSender</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisResultEntities.csproj">
       <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
       <Name>ForecastAnalysisResultEntities</Name>
