@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Unity;
+﻿using ForecastNotificationSender.ForecastNotificationFormatters;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace ForecastNotificationSender
     {
         protected override void Initialize()
         {
+            Container.RegisterType<IForecastNotificationFormatterFactory, ForecastNotificationFormatterFactory>();
+            Container.RegisterType<IForecastNotificationSender, ForecastNotificationSender>();
             Container.RegisterType<IEmailSender, EmailSender>();
             Container.RegisterType<IWaveForecastNotificationFormatter, WaveForecastNotificationFormatter>();
         }

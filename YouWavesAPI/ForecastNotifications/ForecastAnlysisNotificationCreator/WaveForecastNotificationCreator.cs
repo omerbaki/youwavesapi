@@ -15,7 +15,7 @@ namespace ForecastAnalysisNotificationCreator
 {
     public interface IForecastNotificationCreator
     {
-        Task CreateNotifications(string reportsDirectory);
+        Task<string> CreateNotifications(string reportsDirectory);
     }
 
     public class ForecastNotificationCreator : IForecastNotificationCreator
@@ -34,17 +34,17 @@ namespace ForecastAnalysisNotificationCreator
             mWaveForecastNotificationCreatorFactory = aWaveForecastNotificationCreatorFactory;
         }
 
-        public async Task CreateNotifications(string reportsDirectory)
+        public async Task<string> CreateNotifications(string reportsDirectory)
         {
+            string notificationsDirectory = CreateDailyNotificationsDirectory();
+
             Exception exThrown = null;
             try
             {
                 string processedDirectory = reportsDirectory + "_Processed";
 
                 string[] analysisResults = Directory.GetFiles(reportsDirectory);
-                if (analysisResults.Length == 0) return;
-
-                string notificationsDirectory = CreateDailyNotificationsDirectory();
+                if (analysisResults.Length == 0) return notificationsDirectory;
 
                 foreach (var analysisResult in analysisResults)
                 {
@@ -59,7 +59,13 @@ namespace ForecastAnalysisNotificationCreator
                 exThrown = ex;                
             }
 
-            await mLogger.Error("ForecastNotificationCreator", "Failed to create notifications", exThrown);
+            if (exThrown != null)
+            {
+                await mLogger.Error("ForecastNotificationCreator", "Failed to create notifications", exThrown);
+                exThrown = null;
+            }
+
+            return notificationsDirectory;
         }        
 
         private IWaveForecastNotificationCreator GetWaveForecastNotificationCreator(string analysisResult)

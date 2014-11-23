@@ -1,5 +1,6 @@
 ﻿using ForecastAnalysisNotificationCreator;
 using ForecastAnalysisReport;
+using ForecastNotificationSender;
 using Framework;
 using System;
 using System.Collections.Generic;
@@ -16,15 +17,18 @@ namespace YouWavesAPI.Controllers
         private readonly ILogger mLogger; 
         private readonly IForecastAnalysisReportCreator mForecastAnalysisReportCreator;
         private readonly IForecastNotificationCreator mForecastNotificationCreator;
+        private readonly IForecastNotificationSender mForecastNotificationSender;
 
         public ForecastAnalysisController(
             ILogger aLogger, 
             IForecastAnalysisReportCreator forecastAnalysisReportCreator,
-            IForecastNotificationCreator aForecastNotificationCreator)
+            IForecastNotificationCreator aForecastNotificationCreator,
+            IForecastNotificationSender aForecastNotificationSender)
         {
             mLogger = aLogger;
             mForecastAnalysisReportCreator = forecastAnalysisReportCreator;
             mForecastNotificationCreator = aForecastNotificationCreator;
+            mForecastNotificationSender = aForecastNotificationSender;
         }
 
         // POST: api/ForecastAnalysis
@@ -34,7 +38,11 @@ namespace YouWavesAPI.Controllers
             string reportsDirectory = await mForecastAnalysisReportCreator.CreateReports();
 
             await mLogger.Debug("ForecastAnalysisController", "Create Notification");
-            await mForecastNotificationCreator.CreateNotifications(reportsDirectory);
+            string notificationsDirectory = await mForecastNotificationCreator.CreateNotifications(reportsDirectory);
+
+            await mLogger.Debug("ForecastAnalysisController", "Create Notification");
+            await mForecastNotificationSender.SendNotifications(notificationsDirectory);
+        }   
         }        
     }
 }
