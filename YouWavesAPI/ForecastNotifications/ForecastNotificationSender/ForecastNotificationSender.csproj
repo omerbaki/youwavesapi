@@ -58,10 +58,11 @@
     <Compile Include="EmailModel.cs" />
     <Compile Include="EmailSender.cs" />
     <Compile Include="ForecastNotificationFormatters\ForecastNotificationFormatterFactory.cs" />
+    <Compile Include="ForecastNotificationFormatters\IForecastNotificationFormatter.cs" />
+    <Compile Include="ForecastNotificationFormatters\WaveForecastNotificationFormatter.cs" />
     <Compile Include="ForecastNotificationSender.cs" />
     <Compile Include="ForecastNotificationSenderExtendedContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WaveForecastNotificationFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ForecastNotificaitonEntities\ForecastNotificaitonEntities.csproj">

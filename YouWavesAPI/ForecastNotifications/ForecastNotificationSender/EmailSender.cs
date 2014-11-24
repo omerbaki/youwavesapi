@@ -7,25 +7,20 @@ using System.Threading.Tasks;
 using ForecastNotificaitonEntities;
 using System.Net.Mail;
 using System.Net.Mime;
+using ForecastNotificationSender.ForecastNotificationFormatters;
 
 namespace ForecastNotificationSender
 {
     public interface IEmailSender
     {
-        Task Send();
+        Task Send(IForecastNotificationFormatter forecastNotificationFormatter);
     }
 
     public class EmailSender : IEmailSender
     {
-        private readonly IWaveForecastNotificationFormatter mWaveForecastNotificationFormatter;
-        public EmailSender(IWaveForecastNotificationFormatter waveForecastNotificationFormatter)
+        public async Task Send(IForecastNotificationFormatter forecastNotificationFormatter)
         {
-            mWaveForecastNotificationFormatter = waveForecastNotificationFormatter;
-        }
-
-        public async Task Send()
-        {
-            var emailModel = await mWaveForecastNotificationFormatter.GetEmailFormat();
+            var emailModel = await forecastNotificationFormatter.GetEmailFormat();
 
             try
             {

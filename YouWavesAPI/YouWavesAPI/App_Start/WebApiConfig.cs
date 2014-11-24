@@ -1,5 +1,6 @@
 ﻿using ForecastAnalysisNotificationCreator;
 using ForecastAnalysisReport;
+using ForecastNotificationSender;
 using Framework;
 using IsramarWaveAnalyzer;
 using LevYamWaveAnalyzer;
@@ -24,6 +25,7 @@ namespace YouWavesAPI
             container.AddNewExtension<IsramarWaveAnalyzerExtendedContainer>();
             container.AddNewExtension<ForecastAnalysisReportExtendedContainer>();
             container.AddNewExtension<ForecastAnlysisNotificationCreatorExtendedContainer>();
+            container.AddNewExtension<ForecastNotificationSenderExtendedContainer>();
 
             config.DependencyResolver = new UnityResolver(container);            
 

@@ -42,7 +42,6 @@ namespace YouWavesAPI.Controllers
 
             await mLogger.Debug("ForecastAnalysisController", "Create Notification");
             await mForecastNotificationSender.SendNotifications(notificationsDirectory);
-        }   
         }        
     }
 }

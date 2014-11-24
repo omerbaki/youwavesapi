@@ -1,4 +1,5 @@
-﻿using ForecastNotificationSender.ForecastNotificationFormatters;
+﻿using ForecastNotificaitonEntities;
+using ForecastNotificationSender.ForecastNotificationFormatters;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,8 @@ namespace ForecastNotificationSender
             Container.RegisterType<IForecastNotificationFormatterFactory, ForecastNotificationFormatterFactory>();
             Container.RegisterType<IForecastNotificationSender, ForecastNotificationSender>();
             Container.RegisterType<IEmailSender, EmailSender>();
-            Container.RegisterType<IWaveForecastNotificationFormatter, WaveForecastNotificationFormatter>();
+
+            Container.RegisterType<IForecastNotificationFormatter, WaveForecastNotificationFormatter>(typeof(WaveForecastNotificationModel).Name);
         }
     }    
 }

@@ -1,4 +1,5 @@
-﻿using ForecastNotificationSender.ForecastNotificationFormatters;
+﻿using ForecastNotificaitonEntities;
+using ForecastNotificationSender.ForecastNotificationFormatters;
 using Framework;
 using System;
 using System.Collections.Generic;
@@ -19,15 +20,18 @@ namespace ForecastNotificationSender
         private readonly ILogger mLogger;
         private readonly IJsonSerializer mJsonSerializer;
         private readonly IForecastNotificationFormatterFactory mForecastNotificationFormatterFactory;
+        private readonly IEmailSender mEmailSender;
 
         public ForecastNotificationSender(
             ILogger aLogger,
             IJsonSerializer jsonSerializer,
-            IForecastNotificationFormatterFactory aForecastNotificationFormatterFactory)
+            IForecastNotificationFormatterFactory aForecastNotificationFormatterFactory,
+            IEmailSender aEmailSender)
         {
             mLogger = aLogger;            
             mJsonSerializer = jsonSerializer;
             mForecastNotificationFormatterFactory = aForecastNotificationFormatterFactory;
+            mEmailSender = aEmailSender;
         }
 
         public async Task SendNotifications(string notificationsDirectory)
@@ -37,15 +41,13 @@ namespace ForecastNotificationSender
             {
                 string processedDirectory = notificationsDirectory + "_Processed";
 
-                string[] analysisResults = Directory.GetFiles(reportsDirectory);
-                if (analysisResults.Length == 0) return;
+                string[] notificationFilePaths = Directory.GetFiles(notificationsDirectory);
+                if (notificationFilePaths.Length == 0) return;
 
-                foreach (var analysisResult in analysisResults)
+                foreach (var notificationFilePath in notificationFilePaths)
                 {
-                    var notificationCreator = GetWaveForecastNotificationCreator(analysisResult);
-                    await notificationCreator.UpdateWaveForecastNotification(reportsDirectory, notificationsDirectory);
-
-                    File.Move(analysisResult, processedDirectory);
+                    var notificationFormatter = GetForecastNotificationFormatterCreator(notificationFilePath);
+                    await mEmailSender.Send(notificationFormatter);
                 }
             }
             catch (Exception ex)
@@ -53,7 +55,16 @@ namespace ForecastNotificationSender
                 exThrown = ex;
             }
 
-            await mLogger.Error("ForecastNotificationCreator", "Failed to create notifications", exThrown);
+            if (exThrown != null)
+            {
+                await mLogger.Error("ForecastNotificationCreator", "Failed to create notifications", exThrown);
+                exThrown = null;
+            }
+        }
+
+        private IForecastNotificationFormatter GetForecastNotificationFormatterCreator(string analysisResult)
+        {
+            return mForecastNotificationFormatterFactory.Create(typeof(WaveForecastNotificationModel).Name);
         }
     }
 }
