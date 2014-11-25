@@ -8,11 +8,7 @@ using WaveAnalyzerCommon.Model;
 
 namespace IsramarWaveAnalyzer
 {
-    internal interface IIsramarImageDownloader : IImageDownloader
-    {
-    }
-
-    internal class IsramarImageDownloader : ImageDownloader, IIsramarImageDownloader
+    internal class IsramarImageDownloader : ImageDownloader
     {
         private const string ISRAMAR_IMAGE_NAME = "isramar.{0}.gif";
         private const string ISRAMAR_IMAGE_URL = "http://isramar.ocean.org.il/isramar2009/wave_model/wave_maps/wam/{0}/coarse/{1}.windir.gif";

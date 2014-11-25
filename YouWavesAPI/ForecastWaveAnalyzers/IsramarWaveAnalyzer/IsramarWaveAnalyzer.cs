@@ -12,8 +12,8 @@ namespace IsramarWaveAnalyzer
     internal class IsramarWaveAnalyzer : WaveAnalyzerBase
     {
         public IsramarWaveAnalyzer(
-            IIsramarImageDownloader imageDownloader,
-            IIsramarImageAnalyzer imageAnalyzer)
+            IImageDownloader imageDownloader,
+            IImageAnalyzer imageAnalyzer)
             : base(imageDownloader, imageAnalyzer)
         {
         }

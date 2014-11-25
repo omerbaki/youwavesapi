@@ -8,11 +8,7 @@ using WaveAnalyzerCommon;
 
 namespace LevYamWaveAnalyzer.Lev
 {
-    internal interface IWindAlertLevImageAnalyzer : IImageAnalyzer
-    {
-    }
-
-    internal class WindAlertLevImageAnalyzer : WindAlertImageAnalyzer, IWindAlertLevImageAnalyzer
+    internal class WindAlertLevImageAnalyzer : WindAlertImageAnalyzer
     {
         protected override Rectangle GetRelevantArea()
         {

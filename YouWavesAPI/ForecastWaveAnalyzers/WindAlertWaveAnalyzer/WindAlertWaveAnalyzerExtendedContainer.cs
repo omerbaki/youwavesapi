@@ -14,14 +14,23 @@ namespace LevYamWaveAnalyzer
     {
         protected override void Initialize()
         {
-            Container.RegisterType<IWindAlertLevImageAnalyzer, WindAlertLevImageAnalyzer>();
-            Container.RegisterType<IWindAlertLevImageDownloader, WindAlertLevImageDownloader>();
+            Container.RegisterType<IImageAnalyzer, WindAlertLevImageAnalyzer>("WindAlertLevImageAnalyzer");
+            Container.RegisterType<IImageDownloader, WindAlertLevImageDownloader>("WindAlertLevImageDownloader");
 
-            Container.RegisterType<IWindAlertBenImageAnalyzer, WindAlertBenImageAnalyzer>();
-            Container.RegisterType<IWindAlertBenImageDownloader, WindAlertBenImageDownloader>();
+            Container.RegisterType<IImageAnalyzer, WindAlertBenImageAnalyzer>("WindAlertBenImageAnalyzer");
+            Container.RegisterType<IImageDownloader, WindAlertBenImageDownloader>("WindAlertBenImageDownloader");
 
-            Container.RegisterType<IWaveAnalyzer, WindAlertLevWaveAnalyzer>("LevWaveAnalyzer");
-            Container.RegisterType<IWaveAnalyzer, WindAlertBenWaveAnalyzer>("BenWaveAnalyzer");            
+            Container.RegisterType<IWaveAnalyzer, WindAlertLevWaveAnalyzer>(
+                "LevWaveAnalyzer",
+                new InjectionConstructor(
+                    new ResolvedParameter<IImageDownloader>("WindAlertLevImageDownloader"),
+                    new ResolvedParameter<IImageAnalyzer>("WindAlertLevImageAnalyzer")));
+            
+            Container.RegisterType<IWaveAnalyzer, WindAlertBenWaveAnalyzer>(
+                "BenWaveAnalyzer",
+                new InjectionConstructor(
+                    new ResolvedParameter<IImageDownloader>("WindAlertBenImageDownloader"),
+                    new ResolvedParameter<IImageAnalyzer>("WindAlertBenImageAnalyzer")));
         }
     }
 }

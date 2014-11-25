@@ -9,11 +9,7 @@ using WaveAnalyzerCommon.Model;
 
 namespace IsramarWaveAnalyzer
 {
-    internal interface IIsramarImageAnalyzer : IImageAnalyzer
-    {
-    }
-
-    internal class IsramarImageAnalyzer : ImageAnalyzer, IIsramarImageAnalyzer
+    internal class IsramarImageAnalyzer : ImageAnalyzer
     {
         protected override Rectangle GetRelevantArea()
         {

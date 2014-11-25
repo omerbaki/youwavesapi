@@ -7,11 +7,7 @@ using WaveAnalyzerCommon;
 
 namespace LevYamWaveAnalyzer.Ben
 {
-    internal interface IWindAlertBenImageDownloader : IImageDownloader
-    {
-    }
-
-    internal class WindAlertBenImageDownloader : WindAlertImageDownloader, IWindAlertBenImageDownloader
+    internal class WindAlertBenImageDownloader : WindAlertImageDownloader
     {
         private const string BEN_IMAGE_NAME = "ben.{0}.jpg";
 

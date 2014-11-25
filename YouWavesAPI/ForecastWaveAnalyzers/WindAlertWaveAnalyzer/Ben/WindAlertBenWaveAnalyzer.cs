@@ -12,8 +12,8 @@ namespace LevYamWaveAnalyzer.Ben
     internal class WindAlertBenWaveAnalyzer : WindAlertWaveAnalyzerBase
     {
         public WindAlertBenWaveAnalyzer(
-            IWindAlertBenImageDownloader imageDownloader,
-            IWindAlertBenImageAnalyzer imageAnalyzer)
+            IImageDownloader imageDownloader,
+            IImageAnalyzer imageAnalyzer)
             : base(imageDownloader, imageAnalyzer)
         {
         }

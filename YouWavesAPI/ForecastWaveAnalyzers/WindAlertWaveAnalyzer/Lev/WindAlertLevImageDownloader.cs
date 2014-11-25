@@ -7,11 +7,7 @@ using WaveAnalyzerCommon;
 
 namespace LevYamWaveAnalyzer.Lev
 {
-    internal interface IWindAlertLevImageDownloader : IImageDownloader
-    {
-    }
-
-    internal class WindAlertLevImageDownloader : WindAlertImageDownloader, IWindAlertLevImageDownloader
+    internal class WindAlertLevImageDownloader : WindAlertImageDownloader
     {
         private const string LEV_YAM_IMAGE_NAME = "levyam.{0}.jpg";
 
