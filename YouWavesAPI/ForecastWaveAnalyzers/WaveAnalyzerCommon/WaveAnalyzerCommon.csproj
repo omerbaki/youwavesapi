@@ -57,9 +57,9 @@
     <Compile Include="WaveAnalyzerCommonExtendedContainer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ForecastAnalysisResultEntities\ForecastAnalysisResultEntities.csproj">
+    <ProjectReference Include="..\ForecastAnalysisResultEntities\ForecastAnalysisModel.csproj">
       <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
-      <Name>ForecastAnalysisResultEntities</Name>
+      <Name>ForecastAnalysisModel</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

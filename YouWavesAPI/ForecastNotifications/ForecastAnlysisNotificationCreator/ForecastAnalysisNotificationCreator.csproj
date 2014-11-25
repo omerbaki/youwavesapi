@@ -59,9 +59,9 @@
     <Compile Include="WaveForecastNotificationCreators\WaveForecastNotificationCreatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisResultEntities.csproj">
+    <ProjectReference Include="..\..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisModel.csproj">
       <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
-      <Name>ForecastAnalysisResultEntities</Name>
+      <Name>ForecastAnalysisModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\ForecastNotificaitonEntities\ForecastNotificaitonEntities.csproj">
       <Project>{c3e1120b-0102-4d44-862e-0c78c8454257}</Project>

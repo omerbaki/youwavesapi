@@ -1,5 +1,5 @@
 ﻿using ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators;
-using ForecastAnalysisResultEntities;
+using ForecastAnalysisModel;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace ForecastAnalysisNotificationCreator
             Container.RegisterType<IWaveForecastNotificationCreatorFactory, WaveForecastNotificationCreatorFactory>();
             Container.RegisterType<IForecastNotificationCreator, ForecastNotificationCreator>();
 
-            Container.RegisterType<IWaveForecastNotificationCreator, IsramarWaveForecastNotificationCreator>(typeof(IsramarWaveAnalysisResult).Name);
+            Container.RegisterType<IWaveForecastNotificationCreator, IsramarWaveForecastNotificationCreator>(typeof(IsramarWaveAnalysisModel).Name);
         }
     }
 }

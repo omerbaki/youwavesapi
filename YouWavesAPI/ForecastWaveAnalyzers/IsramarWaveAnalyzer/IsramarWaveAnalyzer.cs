@@ -1,4 +1,4 @@
-﻿using ForecastAnalysisResultEntities;
+﻿using ForecastAnalysisModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,15 +18,19 @@ namespace IsramarWaveAnalyzer
         {
         }
 
-        protected override WaveAnalysisResult CreateImageAnalysisResult()
+        protected override WaveAnalysisModel CreateWaveAnalysisModel()
         {
-            return new IsramarWaveAnalysisResult();
+            var isramarWaveAnalysisModel = new IsramarWaveAnalysisModel();
+            isramarWaveAnalysisModel.ForecastStartDate = DateTime.Today.AddDays(1);
+            isramarWaveAnalysisModel.ForecastEndDate = DateTime.Today.AddDays(4);
+            return isramarWaveAnalysisModel;
         }
 
         public override bool ShouldRun()
         {
             bool alreadyRanToday = mLastRunTime.Date == DateTime.Today;
-            return (DateTime.Now.Hour == 8) && !alreadyRanToday;
+            return (DateTime.Now.Hour == 23) && !alreadyRanToday;
         }
+
     }
 }

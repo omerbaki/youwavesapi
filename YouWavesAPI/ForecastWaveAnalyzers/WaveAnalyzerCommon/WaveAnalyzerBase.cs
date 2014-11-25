@@ -1,4 +1,4 @@
-﻿using ForecastAnalysisResultEntities;
+﻿using ForecastAnalysisModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ namespace WaveAnalyzerCommon
 {
     public interface IWaveAnalyzer
     {    
-        Task<WaveAnalysisResult> Analyze();
+        Task<WaveAnalysisModel> Analyze();
         bool ShouldRun();
     }
 
@@ -28,32 +28,29 @@ namespace WaveAnalyzerCommon
             mImageAnalyzer = imageAnalyzer;
         }
 
-        public async Task<WaveAnalysisResult> Analyze()
+        public async Task<WaveAnalysisModel> Analyze()
         {
             mLastRunTime = DateTime.Now;
 
-            var result = CreateImageAnalysisResult();
+            var waveAnalysisModel = CreateWaveAnalysisModel();
 
-            TimeSpan forecastDuration = GetForecastDuration();
-            string imageFolder = await mImageDownloader.DownloadImages();
+            string imageFolder = await mImageDownloader.DownloadImages(waveAnalysisModel);
 
             var imagesPaths = Directory.GetFiles(imageFolder);
             foreach (var imagePath in imagesPaths)
             {
                 if (new FileInfo(imagePath).Length == 0) continue;
 
-                float analysisResult = mImageAnalyzer.AnalyzeImage(imagePath);
-                result.Update(analysisResult, imagePath);
+                float analysisValue = mImageAnalyzer.AnalyzeImage(imagePath);
+                waveAnalysisModel.Update(analysisValue, imagePath);
             }
 
             Directory.Delete(imageFolder, true);
 
-            return result;
+            return waveAnalysisModel;
         }
 
-        protected abstract TimeSpan GetForecastDuration();
-
-        protected abstract WaveAnalysisResult CreateImageAnalysisResult();
+        protected abstract WaveAnalysisModel CreateWaveAnalysisModel();
 
         public abstract bool ShouldRun();
     }

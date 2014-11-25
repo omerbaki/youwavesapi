@@ -39,7 +39,7 @@ namespace ForecastNotificationSender
             Exception exThrown = null;
             try
             {
-                string processedDirectory = notificationsDirectory + "_Processed";
+                string processedDirectory = CreateProcessedDirectory(notificationsDirectory);
 
                 string[] notificationFilePaths = Directory.GetFiles(notificationsDirectory);
                 if (notificationFilePaths.Length == 0) return;
@@ -63,6 +63,17 @@ namespace ForecastNotificationSender
                 await mLogger.Error("ForecastNotificationCreator", "Failed to create notifications", exThrown);
                 exThrown = null;
             }
+        }
+
+        private string CreateProcessedDirectory(string notificationsDirectory)
+        {
+            string processedDirectory = notificationsDirectory + "_Processed";
+            if(!Directory.Exists(processedDirectory))
+            {
+                Directory.CreateDirectory(processedDirectory);
+            }
+
+            return processedDirectory;
         }
 
         private IForecastNotificationFormatter GetForecastNotificationFormatterCreator(string analysisResult)

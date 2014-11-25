@@ -1,4 +1,4 @@
-﻿using ForecastAnalysisResultEntities;
+﻿using ForecastAnalysisModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +17,9 @@ namespace LevYamWaveAnalyzer.Lev
         {
         }
 
-        protected override WaveAnalysisResult CreateImageAnalysisResult()
+        protected override WaveAnalysisModel CreateWaveAnalysisModel()
         {
-            return new WindAlertLevWaveAnalysisResult();
+            return new WindAlertLevWaveAnalysisModel();
         }
     }
 }

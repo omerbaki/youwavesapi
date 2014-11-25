@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForecastAnalysisModel;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,19 +12,19 @@ namespace WaveAnalyzerCommon
 {
     public interface IImageDownloader
     {
-        Task<string> DownloadImages();
+        Task<string> DownloadImages(WaveAnalysisModel model);
     }
 
     public abstract class ImageDownloader : IImageDownloader
     {
         public const string IMAGES_FOLDER = @"Images\{0}\{1}";
 
-        public async Task<string> DownloadImages()
+        public async Task<string> DownloadImages(WaveAnalysisModel model)
         {
             string imageFolder = CreateImageFolder();
 
             var downloadTasks = new List<Task>();
-            foreach (var imageModel in GetImageModels())
+            foreach (var imageModel in GetImageModels(model))
             {
                 using (var client = new WebClient())
                 {
@@ -65,7 +66,7 @@ namespace WaveAnalyzerCommon
             return imageFolder;
         }
 
-        protected abstract DownloadImageModel[] GetImageModels();
+        protected abstract DownloadImageModel[] GetImageModels(WaveAnalysisModel model);
         protected abstract string GetDownloaderName();
     }
 }

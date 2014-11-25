@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForecastAnalysisResultEntities
+namespace ForecastAnalysisModel
 {
-    public abstract class WaveAnalysisResult
+    public abstract class WaveAnalysisModel
     {
         private DateTime mCreatedAt;
-        public WaveAnalysisResult()
+        public WaveAnalysisModel()
         {
             mCreatedAt = DateTime.Now;
         }

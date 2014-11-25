@@ -1,5 +1,5 @@
 ﻿using ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators;
-using ForecastAnalysisResultEntities;
+using ForecastAnalysisModel;
 using ForecastNotificaitonEntities;
 using Framework;
 using Newtonsoft.Json;
@@ -41,18 +41,18 @@ namespace ForecastAnalysisNotificationCreator
             Exception exThrown = null;
             try
             {
-                string processedDirectory = reportsDirectory + "_Processed";
+                string processedDirectory = CreateProcessedDirectory(reportsDirectory);
 
-                string[] analysisResults = Directory.GetFiles(reportsDirectory);
-                if (analysisResults.Length == 0) return notificationsDirectory;
+                string[] analysisModels = Directory.GetFiles(reportsDirectory);
+                if (analysisModels.Length == 0) return notificationsDirectory;
 
-                foreach (var analysisResult in analysisResults)
+                foreach (var analysisModel in analysisModels)
                 {
-                    var notificationCreator = GetWaveForecastNotificationCreator(analysisResult);
+                    var notificationCreator = GetWaveForecastNotificationCreator(analysisModel);
                     await notificationCreator.UpdateWaveForecastNotification(reportsDirectory, notificationsDirectory);
 
-                    string processedFilePath = Path.Combine(processedDirectory, analysisResult);
-                    File.Move(analysisResult, processedFilePath);
+                    string processedFilePath = Path.Combine(processedDirectory, analysisModel);
+                    File.Move(analysisModel, processedFilePath);
                 }              
             }
             catch(Exception ex)
@@ -67,11 +67,22 @@ namespace ForecastAnalysisNotificationCreator
             }
 
             return notificationsDirectory;
-        }        
+        }
 
-        private IWaveForecastNotificationCreator GetWaveForecastNotificationCreator(string analysisResult)
+        private string CreateProcessedDirectory(string reportsDirectory)
         {
-            return mWaveForecastNotificationCreatorFactory.Create(typeof(IsramarWaveAnalysisResult).Name);           
+            string processedDirectory = reportsDirectory + "_Processed";
+            if (!Directory.Exists(processedDirectory))
+            {
+                Directory.CreateDirectory(processedDirectory);
+            }
+
+            return processedDirectory;
+        }
+
+        private IWaveForecastNotificationCreator GetWaveForecastNotificationCreator(string analysisModel)
+        {
+            return mWaveForecastNotificationCreatorFactory.Create(typeof(IsramarWaveAnalysisModel).Name);           
         }
 
         private string CreateDailyNotificationsDirectory()

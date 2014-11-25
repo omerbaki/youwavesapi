@@ -26,51 +26,57 @@ namespace ForecastNotificationSender.ForecastNotificationFormatters
                (await mJsonSerializer.Import(waveForecastNotifications[0], typeof(WaveForecastNotificationModel)))
                as WaveForecastNotificationModel;
 
+            int isramarForecastDuration =
+                (int)(waveForecastNotification.IsramarForecastEndDate - waveForecastNotification.IsramarForecastStartDate).TotalDays;
+
             var emailModel = new EmailModel();
-            if (waveForecastNotification.IsramarStartDate == default(DateTime))
+            if (waveForecastNotification.IsramarWavesStartDate == default(DateTime))
             {
-                emailModel.Subject = "No waves in the coming 3 days";
-                emailModel.Body = "No waves in the coming 3 days";
+                emailModel.Subject = string.Format("No waves in the coming {0} days", isramarForecastDuration);
+                emailModel.Body = string.Format("No waves in the coming {0} days", isramarForecastDuration);
             }
-            else if (waveForecastNotification.IsramarStartDate == DateTime.Today &&
-                     waveForecastNotification.IsramarEndDate == default(DateTime))
+            else if (waveForecastNotification.IsramarWavesStartDate == waveForecastNotification.IsramarForecastStartDate &&
+                     waveForecastNotification.IsramarWavesEndDate == default(DateTime))
             {
-                emailModel.Subject = string.Format("Waves continue today till after {0}", waveForecastNotification.IsramarStartDate.AddDays(2).DayOfWeek);
+                emailModel.Subject = 
+                    string.Format(
+                        "Waves continue today till after {0}",
+                        waveForecastNotification.IsramarWavesStartDate.AddDays(isramarForecastDuration - 1).DayOfWeek);
                 emailModel.Body =
                     string.Format(
                     "Waves continue past {0}",
-                    waveForecastNotification.IsramarStartDate.AddDays(2).DayOfWeek);
+                    waveForecastNotification.IsramarWavesStartDate.AddDays(isramarForecastDuration - 1).DayOfWeek);
             }
-            else if (waveForecastNotification.IsramarStartDate == DateTime.Today &&
-                     waveForecastNotification.IsramarEndDate != default(DateTime))
+            else if (waveForecastNotification.IsramarWavesStartDate == DateTime.Today &&
+                     waveForecastNotification.IsramarWavesEndDate != default(DateTime))
             {
-                emailModel.Subject = string.Format("Waves continue till {0}", waveForecastNotification.IsramarEndDate.DayOfWeek);
+                emailModel.Subject = string.Format("Waves continue till {0}", waveForecastNotification.IsramarWavesEndDate.DayOfWeek);
                 emailModel.Body =
                     string.Format(
                     "Waves continue till {0} at {1}",
-                    waveForecastNotification.IsramarEndDate.DayOfWeek,
-                    waveForecastNotification.IsramarEndDate.Hour);
+                    waveForecastNotification.IsramarWavesEndDate.DayOfWeek,
+                    waveForecastNotification.IsramarWavesEndDate.Hour);
             }
-            else if (waveForecastNotification.IsramarEndDate == default(DateTime))
+            else if (waveForecastNotification.IsramarWavesEndDate == default(DateTime))
             {
-                emailModel.Subject = string.Format("Waves coming on {0}", waveForecastNotification.IsramarStartDate.DayOfWeek);
+                emailModel.Subject = string.Format("Waves coming on {0}", waveForecastNotification.IsramarWavesStartDate.DayOfWeek);
                 emailModel.Body =
                     string.Format(
                     "Waves coming on {0} at {1} lasting past {2}",
-                    waveForecastNotification.IsramarStartDate.DayOfWeek,
-                    waveForecastNotification.IsramarStartDate.ToString("h tt"),
-                    waveForecastNotification.IsramarStartDate.AddDays(2).DayOfWeek);
+                    waveForecastNotification.IsramarWavesStartDate.DayOfWeek,
+                    waveForecastNotification.IsramarWavesStartDate.ToString("h tt"),
+                    waveForecastNotification.IsramarWavesStartDate.AddDays(isramarForecastDuration - 1).DayOfWeek);
             }
             else
             {
-                emailModel.Subject = string.Format("Waves coming on {0}", waveForecastNotification.IsramarStartDate.DayOfWeek);
+                emailModel.Subject = string.Format("Waves coming on {0}", waveForecastNotification.IsramarWavesStartDate.DayOfWeek);
                 emailModel.Body =
                     string.Format(
                     "Waves coming on {0} at {1} lasting till {2} at {3}",
-                    waveForecastNotification.IsramarStartDate.DayOfWeek,
-                    waveForecastNotification.IsramarStartDate.ToString("h tt"),
-                    waveForecastNotification.IsramarEndDate.DayOfWeek,
-                    waveForecastNotification.IsramarEndDate.ToString("h tt"));
+                    waveForecastNotification.IsramarWavesStartDate.DayOfWeek,
+                    waveForecastNotification.IsramarWavesStartDate.ToString("h tt"),
+                    waveForecastNotification.IsramarWavesEndDate.DayOfWeek,
+                    waveForecastNotification.IsramarWavesEndDate.ToString("h tt"));
             }
 
             return emailModel;

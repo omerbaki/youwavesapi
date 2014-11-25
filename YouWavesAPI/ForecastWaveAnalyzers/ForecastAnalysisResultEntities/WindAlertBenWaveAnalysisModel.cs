@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForecastAnalysisResultEntities
+namespace ForecastAnalysisModel
 {
-    public class WindAlertLevWaveAnalysisResult : WindAlertWaveAnalysisResult
+    public class WindAlertBenWaveAnalysisModel : WindAlertWaveAnalysisModel
     {
     }
 }

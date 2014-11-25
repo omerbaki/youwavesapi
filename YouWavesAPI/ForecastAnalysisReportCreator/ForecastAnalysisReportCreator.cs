@@ -43,12 +43,12 @@ namespace ForecastAnalysisReport
 
                     await mLogger.Debug("ForecastAnalysisReportCreator", "Running waveAnalyzer " + waveAnalyzer.GetType().Name);
 
-                    var waveAnalysisResult = await waveAnalyzer.Analyze();
+                    var waveAnalysisModel = await waveAnalyzer.Analyze();
 
                     string reportFileName =
-                        Path.Combine(directory, waveAnalysisResult.GetType().Name + "_" + DateTime.Now.ToString("yyyyMMdd_HHmm") + ".json");
+                        Path.Combine(directory, waveAnalysisModel.GetType().Name + "_" + DateTime.Now.ToString("yyyyMMdd_HHmm") + ".json");
 
-                    await mJsonSerializer.Export(reportFileName, waveAnalysisResult);
+                    await mJsonSerializer.Export(reportFileName, waveAnalysisModel);
                 }
                 catch (Exception ex)
                 {
