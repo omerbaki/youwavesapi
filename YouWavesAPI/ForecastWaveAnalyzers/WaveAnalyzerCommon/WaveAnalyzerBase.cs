@@ -34,6 +34,7 @@ namespace WaveAnalyzerCommon
 
             var result = CreateImageAnalysisResult();
 
+            TimeSpan forecastDuration = GetForecastDuration();
             string imageFolder = await mImageDownloader.DownloadImages();
 
             var imagesPaths = Directory.GetFiles(imageFolder);
@@ -49,6 +50,8 @@ namespace WaveAnalyzerCommon
 
             return result;
         }
+
+        protected abstract TimeSpan GetForecastDuration();
 
         protected abstract WaveAnalysisResult CreateImageAnalysisResult();
 

@@ -48,6 +48,9 @@ namespace ForecastNotificationSender
                 {
                     var notificationFormatter = GetForecastNotificationFormatterCreator(notificationFilePath);
                     await mEmailSender.Send(notificationFormatter);
+
+                    string processedFilePath = Path.Combine(processedDirectory, notificationFilePath);
+                    File.Move(notificationFilePath, processedFilePath);
                 }
             }
             catch (Exception ex)
