@@ -1,0 +1,2 @@
+* Add Unitests
+* Send email upon exception
