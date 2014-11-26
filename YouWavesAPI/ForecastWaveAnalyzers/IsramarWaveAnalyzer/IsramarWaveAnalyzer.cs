@@ -29,7 +29,7 @@ namespace IsramarWaveAnalyzer
         public override bool ShouldRun()
         {
             bool alreadyRanToday = mLastRunTime.Date == DateTime.Today;
-            return (DateTime.Now.Hour == 23) && !alreadyRanToday;
+            return (DateTime.Now.Hour == 8) && !alreadyRanToday;
         }
 
     }

@@ -51,7 +51,7 @@ namespace ForecastAnalysisNotificationCreator
                     var notificationCreator = GetWaveForecastNotificationCreator(analysisModel);
                     await notificationCreator.UpdateWaveForecastNotification(reportsDirectory, notificationsDirectory);
 
-                    string processedFilePath = Path.Combine(processedDirectory, analysisModel);
+                    string processedFilePath = Path.Combine(processedDirectory, new FileInfo(analysisModel).Name);
                     File.Move(analysisModel, processedFilePath);
                 }              
             }
