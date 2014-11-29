@@ -25,8 +25,9 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreato
         public void Setup()
         {
             mLogger = A.Fake<ILogger>();
-            mReportCreators = A.Fake<IEnumerable<IReportCreator>>();
-            mStorageAccessor = A.Fake<IStorageAccessor>();
+            //mReportCreators = new Fake<IEnumerable<IReportCreator>>();
+
+            mStorageAccessor = new Fake<IStorageAccessor>();
 
             //var fake = new Fake<IFoo>();
             //fake
