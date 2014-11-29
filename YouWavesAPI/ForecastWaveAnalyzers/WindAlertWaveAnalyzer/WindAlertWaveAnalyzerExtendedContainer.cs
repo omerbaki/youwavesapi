@@ -20,13 +20,13 @@ namespace LevYamWaveAnalyzer
             Container.RegisterType<IImageAnalyzer, WindAlertBenImageAnalyzer>("WindAlertBenImageAnalyzer");
             Container.RegisterType<IImageDownloader, WindAlertBenImageDownloader>("WindAlertBenImageDownloader");
 
-            Container.RegisterType<IWaveAnalyzer, WindAlertLevWaveAnalyzer>(
+            Container.RegisterType<IReportCreator, WindAlertLevWaveAnalyzer>(
                 "LevWaveAnalyzer",
                 new InjectionConstructor(
                     new ResolvedParameter<IImageDownloader>("WindAlertLevImageDownloader"),
                     new ResolvedParameter<IImageAnalyzer>("WindAlertLevImageAnalyzer")));
             
-            Container.RegisterType<IWaveAnalyzer, WindAlertBenWaveAnalyzer>(
+            Container.RegisterType<IReportCreator, WindAlertBenWaveAnalyzer>(
                 "BenWaveAnalyzer",
                 new InjectionConstructor(
                     new ResolvedParameter<IImageDownloader>("WindAlertBenImageDownloader"),

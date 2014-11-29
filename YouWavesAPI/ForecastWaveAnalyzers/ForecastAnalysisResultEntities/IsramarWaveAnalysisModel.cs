@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ForecastAnalysisModel
 {
-    public class IsramarWaveAnalysisModel : WaveAnalysisModel
+    public class IsramarWaveAnalysisModel : BaseReportModel
     {
         public DateTime ForecastStartDate { get; set; }
         public DateTime ForecastEndDate { get; set; }

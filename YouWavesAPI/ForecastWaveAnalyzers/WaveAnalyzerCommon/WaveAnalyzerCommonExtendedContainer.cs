@@ -13,7 +13,7 @@ namespace WaveAnalyzerCommon
         {
             Container.RegisterType<IImageDownloader, ImageDownloader>();
             Container.RegisterType<IImageAnalyzer, ImageAnalyzer>();
-            Container.RegisterType<IEnumerable<IWaveAnalyzer>, IWaveAnalyzer[]>();
+            Container.RegisterType<IEnumerable<IReportCreator>, IReportCreator[]>();
         }
     }
 }

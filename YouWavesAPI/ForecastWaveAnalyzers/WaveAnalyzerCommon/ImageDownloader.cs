@@ -12,14 +12,14 @@ namespace WaveAnalyzerCommon
 {
     public interface IImageDownloader
     {
-        Task<string> DownloadImages(WaveAnalysisModel model);
+        Task<string> DownloadImages(BaseReportModel model);
     }
 
     public abstract class ImageDownloader : IImageDownloader
     {
-        public const string IMAGES_FOLDER = @"Images\{0}\{1}";
+        
 
-        public async Task<string> DownloadImages(WaveAnalysisModel model)
+        public async Task<string> DownloadImages(BaseReportModel model)
         {
             string imageFolder = CreateImageFolder();
 
@@ -29,8 +29,10 @@ namespace WaveAnalyzerCommon
                 using (var client = new WebClient())
                 {
                     downloadTasks.Add(
+                        //byte[] imageData = await client.DownloadDataTaskAsync(new Uri(imageModel.ImageUrl));
+
                         client.DownloadFileTaskAsync(
-                            new Uri(imageModel.ImageUrl),
+                            ,
                             Path.Combine(imageFolder, imageModel.ImageName)));
                 }
             }
@@ -66,7 +68,7 @@ namespace WaveAnalyzerCommon
             return imageFolder;
         }
 
-        protected abstract DownloadImageModel[] GetImageModels(WaveAnalysisModel model);
+        protected abstract DownloadImageModel[] GetImageModels(BaseReportModel model);
         protected abstract string GetDownloaderName();
     }
 }

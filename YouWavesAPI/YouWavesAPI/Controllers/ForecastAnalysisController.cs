@@ -1,5 +1,5 @@
 ﻿using ForecastAnalysisNotificationCreator;
-using ForecastAnalysisReport;
+using ReportsCreator;
 using ForecastNotificationSender;
 using Framework;
 using System;
@@ -15,13 +15,13 @@ namespace YouWavesAPI.Controllers
     public class ForecastAnalysisController : ApiController
     {
         private readonly ILogger mLogger; 
-        private readonly IForecastAnalysisReportCreator mForecastAnalysisReportCreator;
+        private readonly IReportsCreator mForecastAnalysisReportCreator;
         private readonly IForecastNotificationCreator mForecastNotificationCreator;
         private readonly IForecastNotificationSender mForecastNotificationSender;
 
         public ForecastAnalysisController(
             ILogger aLogger, 
-            IForecastAnalysisReportCreator forecastAnalysisReportCreator,
+            IReportsCreator forecastAnalysisReportCreator,
             IForecastNotificationCreator aForecastNotificationCreator,
             IForecastNotificationSender aForecastNotificationSender)
         {

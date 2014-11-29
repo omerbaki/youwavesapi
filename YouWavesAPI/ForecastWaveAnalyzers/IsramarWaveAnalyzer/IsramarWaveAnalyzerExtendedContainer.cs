@@ -15,7 +15,7 @@ namespace IsramarWaveAnalyzer
             Container.RegisterType<IImageDownloader, IsramarImageDownloader>("IsramarImageDownloader");
             Container.RegisterType<IImageAnalyzer, IsramarImageAnalyzer>("IsramarImageAnalyzer");
 
-            Container.RegisterType<IWaveAnalyzer, IsramarWaveAnalyzer>(
+            Container.RegisterType<IReportCreator, IsramarWaveAnalyzer>(
                 "IsramarWaveAnalyzer",
                 new InjectionConstructor(
                     new ResolvedParameter<IImageDownloader>("IsramarImageDownloader"),

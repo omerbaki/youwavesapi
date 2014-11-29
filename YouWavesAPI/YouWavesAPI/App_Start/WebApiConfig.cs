@@ -1,5 +1,5 @@
 ﻿using ForecastAnalysisNotificationCreator;
-using ForecastAnalysisReport;
+using ReportsCreator;
 using ForecastNotificationSender;
 using Framework;
 using IsramarWaveAnalyzer;
@@ -23,7 +23,7 @@ namespace YouWavesAPI
             container.AddNewExtension<WaveAnalyzerCommonExtendedContainer>();
             container.AddNewExtension<WindAlertWaveAnalyzerExtendedContainer>();
             container.AddNewExtension<IsramarWaveAnalyzerExtendedContainer>();
-            container.AddNewExtension<ForecastAnalysisReportExtendedContainer>();
+            container.AddNewExtension<ReportsCreatorExtendedContainer>();
             container.AddNewExtension<ForecastAnlysisNotificationCreatorExtendedContainer>();
             container.AddNewExtension<ForecastNotificationSenderExtendedContainer>();
 

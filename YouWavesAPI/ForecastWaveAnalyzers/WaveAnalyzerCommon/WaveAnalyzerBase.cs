@@ -9,13 +9,13 @@ using WaveAnalyzerCommon.Model;
 
 namespace WaveAnalyzerCommon
 {
-    public interface IWaveAnalyzer
+    public interface IReportCreator
     {    
-        Task<WaveAnalysisModel> Analyze();
+        Task<BaseReportModel> Create();
         bool ShouldRun();
     }
 
-    public abstract class WaveAnalyzerBase : IWaveAnalyzer
+    public abstract class WaveAnalyzerBase : IReportCreator
     {
         private readonly IImageDownloader mImageDownloader;
         private readonly IImageAnalyzer mImageAnalyzer;
@@ -28,11 +28,12 @@ namespace WaveAnalyzerCommon
             mImageAnalyzer = imageAnalyzer;
         }
 
-        public async Task<WaveAnalysisModel> Analyze()
+        public async Task<BaseReportModel> Create()
         {
             mLastRunTime = DateTime.Now;
 
-            var waveAnalysisModel = CreateWaveAnalysisModel();
+            var waveForecastReportModel = new WaveForecastReportModel();
+            waveForecastReportModel.ForecastStartDate = DateTime.Today.AddDays(1);
 
             string imageFolder = await mImageDownloader.DownloadImages(waveAnalysisModel);
 
@@ -50,7 +51,7 @@ namespace WaveAnalyzerCommon
             return waveAnalysisModel;
         }
 
-        protected abstract WaveAnalysisModel CreateWaveAnalysisModel();
+        protected abstract void SetForecastEndDate(WaveForecastReportModel waveForecastReportModel);
 
         public abstract bool ShouldRun();
     }

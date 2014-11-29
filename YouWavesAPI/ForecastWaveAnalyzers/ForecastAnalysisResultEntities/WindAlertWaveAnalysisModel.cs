@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ForecastAnalysisModel
 {
-    public abstract class WindAlertWaveAnalysisModel : WaveAnalysisModel
+    public abstract class WindAlertWaveAnalysisModel : BaseReportModel
     {
         public float MarkedPixelsPercentage { get; set; }
 

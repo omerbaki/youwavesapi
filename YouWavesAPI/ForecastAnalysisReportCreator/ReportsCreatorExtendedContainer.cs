@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ForecastAnalysisReport
+namespace ReportsCreator
 {
-    public class ForecastAnalysisReportExtendedContainer : UnityContainerExtension
+    public class ReportsCreatorExtendedContainer : UnityContainerExtension
     {
         protected override void Initialize()
         {
-            Container.RegisterType<IForecastAnalysisReportCreator, ForecastAnalysisReportCreator>();            
+            Container.RegisterType<IReportsCreator, ReportsCreator>();            
         }
     }
 }

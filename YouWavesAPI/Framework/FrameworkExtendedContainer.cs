@@ -12,7 +12,7 @@ namespace Framework
         protected override void Initialize()
         {
             Container.RegisterType<IJsonSerializer, JsonSerializer>();
-            Container.RegisterType<ILogger, Logger>();
+            
         }
     }
 }

@@ -13,7 +13,7 @@ namespace LevYamWaveAnalyzer
     {
         private const string WIND_ALERT_IMAGE_URL = "http://www.windalert.co.il/cameras/{0}?1";
 
-        protected override DownloadImageModel[] GetImageModels(WaveAnalysisModel model)
+        protected override DownloadImageModel[] GetImageModels(BaseReportModel model)
         {
             var imageModels = new List<DownloadImageModel>();
             for (int i = 0; i <= 9; i++)

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ForecastAnalysisModel
 {
-    public abstract class WaveAnalysisModel
+    public abstract class BaseReportModel
     {
         private DateTime mCreatedAt;
-        public WaveAnalysisModel()
+        public BaseReportModel()
         {
             mCreatedAt = DateTime.Now;
         }

@@ -17,7 +17,7 @@ namespace LevYamWaveAnalyzer.Lev
         {
         }
 
-        protected override WaveAnalysisModel CreateWaveAnalysisModel()
+        protected override BaseReportModel CreateWaveAnalysisModel()
         {
             return new WindAlertLevWaveAnalysisModel();
         }

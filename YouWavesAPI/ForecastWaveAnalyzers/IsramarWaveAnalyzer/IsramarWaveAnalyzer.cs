@@ -18,12 +18,9 @@ namespace IsramarWaveAnalyzer
         {
         }
 
-        protected override WaveAnalysisModel CreateWaveAnalysisModel()
+        protected override void SetForecastEndDate(WaveForecastReportModel waveForecastReportModel)
         {
-            var isramarWaveAnalysisModel = new IsramarWaveAnalysisModel();
-            isramarWaveAnalysisModel.ForecastStartDate = DateTime.Today.AddDays(1);
-            isramarWaveAnalysisModel.ForecastEndDate = DateTime.Today.AddDays(4);
-            return isramarWaveAnalysisModel;
+            waveForecastReportModel.ForecastEndDate = waveForecastReportModel.ForecastStartDate.AddDays(5);            
         }
 
         public override bool ShouldRun()

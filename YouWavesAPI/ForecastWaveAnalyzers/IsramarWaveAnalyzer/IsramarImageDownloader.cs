@@ -14,7 +14,7 @@ namespace IsramarWaveAnalyzer
         private const string ISRAMAR_IMAGE_NAME = "isramar.{0}.gif";
         private const string ISRAMAR_IMAGE_URL = "http://isramar.ocean.org.il/isramar2009/wave_model/wave_maps/wam/{0}/coarse/{1}.windir.gif";
 
-        protected override DownloadImageModel[] GetImageModels(WaveAnalysisModel waveAnalysisModel)
+        protected override DownloadImageModel[] GetImageModels(BaseReportModel waveAnalysisModel)
         {
             var isramarWaveAnalysisModel = waveAnalysisModel as IsramarWaveAnalysisModel;
 
