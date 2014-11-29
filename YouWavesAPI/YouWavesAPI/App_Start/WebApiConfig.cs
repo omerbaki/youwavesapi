@@ -1,5 +1,5 @@
 ﻿using ForecastAnalysisNotificationCreator;
-using ReportsCreator;
+using ForecastAnalysisReportCreator;
 using ForecastNotificationSender;
 using Framework;
 using IsramarWaveAnalyzer;

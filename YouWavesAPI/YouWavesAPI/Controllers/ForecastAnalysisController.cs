@@ -1,5 +1,5 @@
 ﻿using ForecastAnalysisNotificationCreator;
-using ReportsCreator;
+using ForecastAnalysisReportCreator;
 using ForecastNotificationSender;
 using Framework;
 using System;
@@ -35,13 +35,13 @@ namespace YouWavesAPI.Controllers
         public async Task Post()
         {
             await mLogger.Debug("ForecastAnalysisController", "Create Reports");
-            string reportsDirectory = await mForecastAnalysisReportCreator.CreateReports();
+            await mForecastAnalysisReportCreator.CreateReports();
 
             await mLogger.Debug("ForecastAnalysisController", "Create Notification");
-            string notificationsDirectory = await mForecastNotificationCreator.CreateNotifications(reportsDirectory);
+            await mForecastNotificationCreator.CreateNotifications();
 
             await mLogger.Debug("ForecastAnalysisController", "Create Notification");
-            await mForecastNotificationSender.SendNotifications(notificationsDirectory);
+            await mForecastNotificationSender.SendNotifications();
         }        
     }
 }

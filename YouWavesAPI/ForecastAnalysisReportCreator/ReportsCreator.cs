@@ -6,30 +6,28 @@ using Framework;
 using LevYamWaveAnalyzer;
 using WaveAnalyzerCommon;
 using System.Reactive.Linq;
+using Logger;
 
-namespace ReportsCreator
+namespace ForecastAnalysisReportCreator
 {
     public interface IReportsCreator
     {
         Task CreateReports();        
     }
 
-    class ReportsCreator : IReportsCreator
+    public class ReportsCreator : IReportsCreator
     {
         private readonly ILogger mLogger; 
-        private readonly IJsonSerializer mJsonSerializer;
         private readonly IEnumerable<IReportCreator> mReportCreators;
         private readonly IStorageAccessor mStorageAccessor;
 
         public ReportsCreator(
             ILogger aLogger, 
             IEnumerable<IReportCreator> aReportCreators,
-            IJsonSerializer aJsonSerializer,
             IStorageAccessor aStorageAccessor)
         {
             mLogger = aLogger;
             mReportCreators = aReportCreators;
-            mJsonSerializer = aJsonSerializer;
             mStorageAccessor = aStorageAccessor;
         }
 
@@ -37,24 +35,36 @@ namespace ReportsCreator
         {
             foreach (var reportCreator in mReportCreators)
             {
-                Exception exThrown = null;
-                try
-                {
-                    if (!reportCreator.ShouldRun()) continue;
+                if (!reportCreator.ShouldRun()) continue;
 
-                    await mLogger.Debug(typeof(ReportsCreator).Name, "Create Report " + reportCreator.GetType().Name);
+                await CreateReport(reportCreator);
+            }
+        }
 
-                    var baseReportModel = await reportCreator.Create();
-                    
-                    await mStorageAccessor.WriteReport(baseReportModel);
-                }
-                catch (Exception ex)
-                {
-                    mLogger.Error(
-                           "ForecastAnalysisReportCreator",
-                           "Failed to run analyzer " + reportCreator.GetType().Name,
-                           ex);                                      
-                }
+        private async Task CreateReport(IReportCreator reportCreator)
+        {
+            Exception exThrown = null;
+            try
+            {
+                await mLogger.Debug(typeof(ReportsCreator).Name, "Create Report " + reportCreator.GetType().Name);
+
+                var createdReport = await reportCreator.Create();
+
+                await mStorageAccessor.WriteReport(createdReport);
+            }
+            catch (Exception ex)
+            {
+                exThrown = ex;
+            }
+
+            if (exThrown != null)
+            {
+                await mLogger.Error(
+                   typeof(ReportsCreator).Name,
+                   "Failed to create report " + reportCreator.GetType().Name,
+                   exThrown);
+
+                exThrown = null;
             }
         }
     }
