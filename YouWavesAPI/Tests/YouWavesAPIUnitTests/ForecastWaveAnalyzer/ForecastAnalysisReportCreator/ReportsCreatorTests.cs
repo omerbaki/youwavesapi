@@ -1,9 +1,6 @@
-﻿using NUnit.Framework;
-using System;
+﻿using FakeItEasy.ExtensionSyntax.Full;
+using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ForecastAnalysisReportCreator;
 using FakeItEasy;
 using Logger;
@@ -16,7 +13,7 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreato
     class ReportsCreatorTests
     {
         private ILogger mLogger;
-        private IEnumerable<IReportCreator> mReportCreators;
+        private IReportCreator mReportCreator;
         private IStorageAccessor mStorageAccessor;
 
         private ReportsCreator mTarget;
@@ -25,22 +22,19 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreato
         public void Setup()
         {
             mLogger = A.Fake<ILogger>();
-            //mReportCreators = new Fake<IEnumerable<IReportCreator>>();
+            mReportCreator = A.Fake<IReportCreator>();
+            mStorageAccessor = A.Fake<IStorageAccessor>();
 
-            mStorageAccessor = new Fake<IStorageAccessor>();
+            var reportCreators = new List<IReportCreator> {mReportCreator};
 
-            //var fake = new Fake<IFoo>();
-            //fake
-
-            mTarget = new ReportsCreator(mLogger, mReportCreators, mStorageAccessor);
+            mTarget = new ReportsCreator(mLogger, reportCreators, mStorageAccessor);
         }
 
         [Test]
         public void CreateReports_ReportCreatorShouldNotRun_NoReportCreated()
         {
-            mReportCreators.CallsTo(x => x.Bar("some argument")).Returns("some return value");
-
-            Assert.IsTrue(true);
+            A.CallTo(() => mReportCreator.ShouldRun()).Returns(false);
+            A.CallTo(() => mReportCreator.Create()).MustNotHaveHappened());
         }
 
         [Test]
