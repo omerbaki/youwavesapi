@@ -9,7 +9,7 @@ using WaveAnalyzerCommon.Model;
 
 namespace LevYamWaveAnalyzer
 {
-    internal abstract class WindAlertWaveAnalyzerBase : WaveForecastAnalyzerBase
+    internal abstract class WindAlertWaveAnalyzerBase : WaveForecastReportCreatorBase
     {
         private const int HOUR_TO_START = 6;
         private const int HOUR_TO_FINISH = 16;

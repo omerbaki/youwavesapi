@@ -16,18 +16,9 @@ namespace WaveAnalyzerCommon
         bool ShouldRun();
     }
 
-    public abstract class WaveForecastAnalyzerBase : IReportCreator
+    public abstract class WaveForecastReportCreatorBase : IReportCreator
     {
-        private readonly IImageDownloader mImageDownloader;
-        private readonly IImageAnalyzer mImageAnalyzer;
-
         protected DateTime mLastRunTime;
-
-        protected WaveForecastAnalyzerBase(IImageDownloader imageDownloader, IImageAnalyzer imageAnalyzer)
-        {
-            mImageDownloader = imageDownloader;
-            mImageAnalyzer = imageAnalyzer;
-        }
 
         public async Task<BaseReportModel> Create()
         {
