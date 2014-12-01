@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IsramarImageAnalyzer.cs" />
-    <Compile Include="IsramarImageDownloader.cs" />
     <Compile Include="IsramarWaveAnalyzer.cs" />
     <Compile Include="IsramarWaveAnalyzerExtendedContainer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,6 +6,7 @@ using FakeItEasy;
 using Logger;
 using WaveAnalyzerCommon;
 using Framework;
+using System.Threading.Tasks;
 
 namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreator
 {
@@ -31,16 +32,24 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreato
         }
 
         [Test]
-        public void CreateReports_ReportCreatorShouldNotRun_NoReportCreated()
+        public async Task CreateReports_ReportCreatorShouldNotRun_NoReportCreated()
         {
             A.CallTo(() => mReportCreator.ShouldRun()).Returns(false);
-            A.CallTo(() => mReportCreator.Create()).MustNotHaveHappened());
+
+            await mTarget.CreateReports();
+
+            A.CallTo(() => mReportCreator.Create()).MustNotHaveHappened();
         }
 
         [Test]
-        public void TestMethod2()
+        public async Task CreateReports_ReportCreatorShouldRun_ReportCreatedAndSaved()
         {
-            Assert.IsTrue(true);
+            A.CallTo(() => mReportCreator.ShouldRun()).Returns(true);
+
+            await mTarget.CreateReports();
+
+            A.CallTo(() => mReportCreator.Create()).MustHaveHappened();
+            A.CallTo(() => mStorageAccessor.Save(null)).WithAnyArguments().MustHaveHappened();
         }
     }  
 }

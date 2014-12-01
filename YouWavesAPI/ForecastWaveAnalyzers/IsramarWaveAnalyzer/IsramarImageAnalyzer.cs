@@ -13,7 +13,7 @@ namespace IsramarWaveAnalyzer
     {
         protected override Rectangle GetRelevantArea()
         {
-            return new Rectangle(730, 315, 66, 45);
+            return new Rectangle(777, 315, 14, 35);
         }
 
         protected override bool ShouldMarkPixel(Color color)

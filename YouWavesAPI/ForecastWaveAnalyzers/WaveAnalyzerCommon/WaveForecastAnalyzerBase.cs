@@ -1,6 +1,7 @@
 ﻿using ForecastAnalysisModel;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,14 +16,14 @@ namespace WaveAnalyzerCommon
         bool ShouldRun();
     }
 
-    public abstract class WaveAnalyzerBase : IReportCreator
+    public abstract class WaveForecastAnalyzerBase : IReportCreator
     {
         private readonly IImageDownloader mImageDownloader;
         private readonly IImageAnalyzer mImageAnalyzer;
 
         protected DateTime mLastRunTime;
 
-        protected WaveAnalyzerBase(IImageDownloader imageDownloader, IImageAnalyzer imageAnalyzer)
+        protected WaveForecastAnalyzerBase(IImageDownloader imageDownloader, IImageAnalyzer imageAnalyzer)
         {
             mImageDownloader = imageDownloader;
             mImageAnalyzer = imageAnalyzer;
@@ -33,25 +34,21 @@ namespace WaveAnalyzerCommon
             mLastRunTime = DateTime.Now;
 
             var waveForecastReportModel = new WaveForecastReportModel();
-            waveForecastReportModel.ForecastStartDate = DateTime.Today.AddDays(1);
+            SetForecastTimeFrame(waveForecastReportModel);
 
-            string imageFolder = await mImageDownloader.DownloadImages(waveAnalysisModel);
-
-            var imagesPaths = Directory.GetFiles(imageFolder);
-            foreach (var imagePath in imagesPaths)
+            var forecastDates = GetForecastDates(waveForecastReportModel);
+            foreach (var forecastDate in forecastDates)
             {
-                if (new FileInfo(imagePath).Length == 0) continue;
-
-                float analysisValue = mImageAnalyzer.AnalyzeImage(imagePath);
-                waveAnalysisModel.Update(analysisValue, imagePath);
+                float waveHeight = await GetWaveHeight(forecastDate);
+                waveForecastReportModel.AddWaveTiming(forecastDate, waveHeight);
             }
 
-            Directory.Delete(imageFolder, true);
-
-            return waveAnalysisModel;
+            return waveForecastReportModel;
         }
 
-        protected abstract void SetForecastEndDate(WaveForecastReportModel waveForecastReportModel);
+        protected abstract void SetForecastTimeFrame(WaveForecastReportModel model);
+        protected abstract DateTime[] GetForecastDates(WaveForecastReportModel model);
+        protected abstract Task<float> GetWaveHeight(DateTime forecastDate);
 
         public abstract bool ShouldRun();
     }

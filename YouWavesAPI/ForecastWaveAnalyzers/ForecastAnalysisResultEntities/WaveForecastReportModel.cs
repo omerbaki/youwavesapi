@@ -11,6 +11,21 @@ namespace ForecastAnalysisModel
         public DateTime ForecastStartDate { get; set; }
         public DateTime ForecastEndDate { get; set; }
         public List<WavesTiming> WavesTiming { get; set; }
+
+        public WaveForecastReportModel()
+        {
+            this.WavesTiming = new List<WavesTiming>();
+        }
+
+        public void AddWaveTiming(DateTime forecastDate, float waveHeight)
+        {
+            this.WavesTiming.Add(
+                new WavesTiming()
+                {
+                    Time = forecastDate,
+                    Height = waveHeight
+                });
+        }
     }
 
     public class WavesTiming

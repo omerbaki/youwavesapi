@@ -11,25 +11,24 @@ namespace WaveAnalyzerCommon
 {
     public interface IImageAnalyzer
     {
-        float AnalyzeImage(string imagePath);
+        float GetWaveHeight(byte[] imageBytes);
     }
 
     public abstract class ImageAnalyzer : IImageAnalyzer
     {
-        public float AnalyzeImage(string imagePath)
+        public float GetWaveHeight(byte[] imageBytes, Rectangle relevantArea)
         {
-            using (var bitmap = new Bitmap(imagePath))
+            using (var ms = new MemoryStream(imageBytes))
             {
-                var relevantArea = GetRelevantArea();
+                using (var bitmap = new Bitmap(ms))
+                {
+                    var totalPixelsCount = GetTotalPixelSize(relevantArea);
+                    var markedPixelsCount = GetMarkedPixelCount(bitmap, relevantArea);
 
-                var totalPixelsCount = GetTotalPixelSize(relevantArea);
-                var markedPixelsCount = GetMarkedPixelCount(bitmap, relevantArea);
-
-                return (float)markedPixelsCount / totalPixelsCount;
+                    return (float)markedPixelsCount / totalPixelsCount;
+                }
             }
         }
-
-        protected abstract Rectangle GetRelevantArea();
 
         protected abstract bool ShouldMarkPixel(Color color);        
 

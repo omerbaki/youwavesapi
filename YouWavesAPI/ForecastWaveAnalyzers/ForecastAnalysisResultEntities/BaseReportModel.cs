@@ -15,7 +15,5 @@ namespace ForecastAnalysisModel
         }
 
         public DateTime CreatedAt { get { return mCreatedAt; } }
-
-        public abstract void Update(float markedPixelsPercentage, string imagePath);
     }
 }

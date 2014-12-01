@@ -12,44 +12,29 @@ namespace WaveAnalyzerCommon
 {
     public interface IImageDownloader
     {
-        Task<string> DownloadImages(BaseReportModel model);
+        Task<byte[]> DownloadImage(DownloadImageModel model);
     }
 
     public abstract class ImageDownloader : IImageDownloader
     {
-        
-
-        public async Task<string> DownloadImages(BaseReportModel model)
+        public async Task<byte[]> DownloadImage(DownloadImageModel imageModel)
         {
-            string imageFolder = CreateImageFolder();
-
-            var downloadTasks = new List<Task>();
-            foreach (var imageModel in GetImageModels(model))
+            using (var client = new WebClient())
             {
-                using (var client = new WebClient())
+                try
                 {
-                    downloadTasks.Add(
-                        //byte[] imageData = await client.DownloadDataTaskAsync(new Uri(imageModel.ImageUrl));
-
-                        client.DownloadFileTaskAsync(
-                            ,
-                            Path.Combine(imageFolder, imageModel.ImageName)));
+                    return await client.DownloadDataTaskAsync(imageModel.ImageUrl);
+                }
+                catch (WebException webEx)
+                {
+                    if (!Is404Error(webEx))
+                    {
+                        throw;
+                    }
                 }
             }
 
-            try
-            {
-                await Task.WhenAll(downloadTasks);
-            }
-            catch (WebException webEx)
-            {
-                if (!Is404Error(webEx))
-                {
-                    throw;
-                }
-            }
-
-            return imageFolder;
+            return null;
         }
 
         private bool Is404Error(WebException webEx)
@@ -57,18 +42,5 @@ namespace WaveAnalyzerCommon
             var errorResponse = webEx.Response as HttpWebResponse;
             return errorResponse != null && errorResponse.StatusCode == HttpStatusCode.NotFound;
         }
-
-        private string CreateImageFolder()
-        {
-            string dateForFolder = DateTime.Now.ToString("yyyy_MM_dd_HH_mm");
-            string imageFolder = string.Format(IMAGES_FOLDER, GetDownloaderName(), dateForFolder);
-
-            Directory.CreateDirectory(imageFolder);
-
-            return imageFolder;
-        }
-
-        protected abstract DownloadImageModel[] GetImageModels(BaseReportModel model);
-        protected abstract string GetDownloaderName();
     }
 }
