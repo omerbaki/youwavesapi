@@ -62,7 +62,7 @@ namespace IsramarWaveAnalyzer
             return mImageAnalyzer.GetWaveHeight(imageBytes);            
         }
 
-        private object CreateDownloadImageModel(DateTime forecastDate)
+        private DownloadImageModel CreateDownloadImageModel(DateTime forecastDate)
         {
             // Today format for URL - 1411110000
             string todayFormat = DateTime.Today.ToString("yyMMddHHmm");
