@@ -8,18 +8,18 @@ using WaveAnalyzerCommon;
 
 namespace LevYamWaveAnalyzer.Lev
 {
-    internal class WindAlertLevWaveAnalyzer : WindAlertWaveAnalyzerBase
+    internal class WindAlertLevWaveAnalyzer// : WindAlertWaveAnalyzerBase
     {
-        public WindAlertLevWaveAnalyzer(
-            IImageDownloader imageDownloader,
-            IImageAnalyzer imageAnalyzer)
-            : base(imageDownloader, imageAnalyzer)
-        {
-        }
-
-        protected override BaseReportModel CreateWaveAnalysisModel()
-        {
-            return new WindAlertLevWaveAnalysisModel();
-        }
+//        public WindAlertLevWaveAnalyzer(
+//            IImageDownloader imageDownloader,
+//            IImageAnalyzer imageAnalyzer)
+//            : base(imageDownloader, imageAnalyzer)
+//        {
+//        }
+//
+//        protected override BaseReportModel CreateWaveAnalysisModel()
+//        {
+//            return new WindAlertLevWaveAnalysisModel();
+//        }
     }
 }

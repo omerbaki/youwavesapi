@@ -12,7 +12,7 @@ namespace WaveAnalyzerCommon
         protected override void Initialize()
         {
             Container.RegisterType<IImageDownloader, ImageDownloader>();
-            Container.RegisterType<IImageAnalyzer, ImageAnalyzer>();
+            //Container.RegisterType<IImageAnalyzer, ImageAnalyzer>();
             Container.RegisterType<IEnumerable<IReportCreator>, IReportCreator[]>();
         }
     }

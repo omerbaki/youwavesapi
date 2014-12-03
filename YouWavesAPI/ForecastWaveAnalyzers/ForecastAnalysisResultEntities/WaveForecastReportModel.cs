@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace ForecastAnalysisModel
 {
+    public enum WaveHeight
+    {
+        None,
+        Small,
+        Medium,
+        Big
+    }
+
     public class WaveForecastReportModel : BaseReportModel
     {
         public DateTime ForecastStartDate { get; set; }
@@ -17,7 +25,7 @@ namespace ForecastAnalysisModel
             this.WavesTiming = new List<WavesTiming>();
         }
 
-        public void AddWaveTiming(DateTime forecastDate, float waveHeight)
+        public void AddWaveTiming(DateTime forecastDate, WaveHeight waveHeight)
         {
             this.WavesTiming.Add(
                 new WavesTiming()
@@ -31,6 +39,6 @@ namespace ForecastAnalysisModel
     public class WavesTiming
     {
         public DateTime Time { get; set; }
-        public float Height { get; set; }
+        public WaveHeight Height { get; set; }
     }
 }

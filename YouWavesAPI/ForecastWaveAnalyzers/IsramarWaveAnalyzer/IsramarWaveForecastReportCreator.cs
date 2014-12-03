@@ -9,7 +9,7 @@ using WaveAnalyzerCommon.Model;
 
 namespace IsramarWaveAnalyzer
 {
-    internal class IsramarWaveAnalyzer : WaveForecastReportCreatorBase
+    public class IsramarWaveForecastReportCreator : WaveForecastReportCreatorBase
     {
         private const string ISRAMAR_IMAGE_NAME = "isramar.{0}.gif";
         private const string ISRAMAR_IMAGE_URL = "http://isramar.ocean.org.il/isramar2009/wave_model/wave_maps/wam/{0}/coarse/{1}.windir.gif";
@@ -18,7 +18,7 @@ namespace IsramarWaveAnalyzer
         private readonly IImageAnalyzer mImageAnalyzer;
 
 
-        public IsramarWaveAnalyzer(
+        public IsramarWaveForecastReportCreator(
             IImageDownloader imageDownloader,
             IImageAnalyzer imageAnalyzer)
         {
@@ -26,10 +26,10 @@ namespace IsramarWaveAnalyzer
             mImageAnalyzer = imageAnalyzer;
         }
 
-        public override bool ShouldRun()
+        public override bool ShouldRun(DateTime now)
         {
-            bool alreadyRanToday = mLastRunTime.Date == DateTime.Today;
-            return (DateTime.Now.Hour == 8) && !alreadyRanToday;
+            bool alreadyRanToday = mLastRunTime.Date == now.Date;
+            return (now.Hour == 8) && !alreadyRanToday;
         }
 
         protected override void SetForecastTimeFrame(WaveForecastReportModel model)
@@ -38,11 +38,11 @@ namespace IsramarWaveAnalyzer
             model.ForecastEndDate = DateTime.Today.AddDays(5);            
         }
 
-        protected abstract DateTime[] GetForecastDates(WaveForecastReportModel model)
+        protected override DateTime[] GetForecastDates(WaveForecastReportModel model)
         {
             var dates = new List<DateTime>();
 
-            int forecastDurationDays =
+            var forecastDurationDays =
                 (int)(model.ForecastEndDate - model.ForecastStartDate).TotalDays;
 
             DateTime currentDate = model.ForecastStartDate;
@@ -55,7 +55,7 @@ namespace IsramarWaveAnalyzer
             return dates.ToArray();
         }
 
-        protected abstract async Task<float> GetWaveHeight(DateTime forecastDate)
+        protected override async Task<WaveHeight> GetWaveHeight(DateTime forecastDate)
         {
             var downloadImageModel = CreateDownloadImageModel(forecastDate);
             var imageBytes = await mImageDownloader.DownloadImage(downloadImageModel);
@@ -77,24 +77,5 @@ namespace IsramarWaveAnalyzer
                     ImageName = string.Format(ISRAMAR_IMAGE_NAME, imageDateFormat)
                 };
         }
-
-        
-
-        public override void UpdateReportModel(float analysisValue, WaveForecastReportModel model)
-        {
-            if (analysisValue >= 0.85f && WavesStartAt == DateTime.MinValue)
-            {
-                string dateFromFileName = Path.GetFileNameWithoutExtension(imagePath).Replace("isramar.", "");
-                WavesStartAt = DateTime.ParseExact(dateFromFileName, "yyMMddHH", CultureInfo.InvariantCulture);
-            }
-            else if (markedPixelsPercentage < 0.5 && WavesStartAt > DateTime.MinValue && WavesEndAt == DateTime.MinValue)
-            {
-                string dateFromFileName = Path.GetFileNameWithoutExtension(imagePath).Replace("isramar.", "");
-                WavesEndAt = DateTime.ParseExact(dateFromFileName, "yyMMddHH", CultureInfo.InvariantCulture);
-            }
-        }
-
-       
-
     }
 }

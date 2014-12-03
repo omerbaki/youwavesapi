@@ -21,23 +21,23 @@ namespace ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators
 
         public async Task UpdateWaveForecastNotification(string reportsDirectory, string notificationsDirectory)
         {
-            string reportFileName = CreateWaveForecastNotificationFileName(notificationsDirectory);
-            var waveForecastNotification = await GetWaveForecastNotificationModel(reportFileName, notificationsDirectory);
-
-            string[] analysisModels = Directory.GetFiles(reportsDirectory, typeof(IsramarWaveAnalysisModel).Name + "*");
-            if (analysisModels.Length == 0) return;
-
-            var isramarWaveAnalysisModel =
-                (await mJsonSerializer.Import(analysisModels[0], typeof(IsramarWaveAnalysisModel)))
-                as IsramarWaveAnalysisModel;
-
-            waveForecastNotification.IsramarForecastStartDate = isramarWaveAnalysisModel.ForecastStartDate;
-            waveForecastNotification.IsramarForecastEndDate = isramarWaveAnalysisModel.ForecastEndDate;
-            waveForecastNotification.IsramarWavesStartDate = isramarWaveAnalysisModel.WavesStartAt;
-            waveForecastNotification.IsramarWavesEndDate = isramarWaveAnalysisModel.WavesEndAt;
-           
-
-            await mJsonSerializer.Export(reportFileName, waveForecastNotification);
+//            string reportFileName = CreateWaveForecastNotificationFileName(notificationsDirectory);
+//            var waveForecastNotification = await GetWaveForecastNotificationModel(reportFileName, notificationsDirectory);
+//
+//            string[] analysisModels = Directory.GetFiles(reportsDirectory, typeof(IsramarWaveAnalysisModel).Name + "*");
+//            if (analysisModels.Length == 0) return;
+//
+//            var isramarWaveAnalysisModel =
+//                (await mJsonSerializer.Import(analysisModels[0], typeof(IsramarWaveAnalysisModel)))
+//                as IsramarWaveAnalysisModel;
+//
+//            waveForecastNotification.IsramarForecastStartDate = isramarWaveAnalysisModel.ForecastStartDate;
+//            waveForecastNotification.IsramarForecastEndDate = isramarWaveAnalysisModel.ForecastEndDate;
+//            waveForecastNotification.IsramarWavesStartDate = isramarWaveAnalysisModel.WavesStartAt;
+//            waveForecastNotification.IsramarWavesEndDate = isramarWaveAnalysisModel.WavesEndAt;
+//           
+//
+//            await mJsonSerializer.Export(reportFileName, waveForecastNotification);
         }
 
         private string CreateWaveForecastNotificationFileName(string notificationsDirectory)

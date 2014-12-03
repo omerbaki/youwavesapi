@@ -12,10 +12,9 @@ namespace IsramarWaveAnalyzer
     {
         protected override void Initialize()
         {
-            Container.RegisterType<IImageDownloader, IsramarImageDownloader>("IsramarImageDownloader");
             Container.RegisterType<IImageAnalyzer, IsramarImageAnalyzer>("IsramarImageAnalyzer");
 
-            Container.RegisterType<IReportCreator, IsramarWaveAnalyzer>(
+            Container.RegisterType<IReportCreator, IsramarWaveForecastReportCreator>(
                 "IsramarWaveAnalyzer",
                 new InjectionConstructor(
                     new ResolvedParameter<IImageDownloader>("IsramarImageDownloader"),

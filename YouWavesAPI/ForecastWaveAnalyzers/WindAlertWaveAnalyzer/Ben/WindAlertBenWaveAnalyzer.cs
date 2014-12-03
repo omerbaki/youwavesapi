@@ -9,18 +9,18 @@ using WaveAnalyzerCommon.Model;
 
 namespace LevYamWaveAnalyzer.Ben
 {
-    internal class WindAlertBenWaveAnalyzer : WindAlertWaveAnalyzerBase
+    internal class WindAlertBenWaveAnalyzer// : WindAlertWaveAnalyzerBase
     {
-        public WindAlertBenWaveAnalyzer(
-            IImageDownloader imageDownloader,
-            IImageAnalyzer imageAnalyzer)
-            : base(imageDownloader, imageAnalyzer)
-        {
-        }
-
-        protected override BaseReportModel CreateWaveAnalysisModel()
-        {
-            return new WindAlertBenWaveAnalysisModel();
-        }
+//        public WindAlertBenWaveAnalyzer(
+//            IImageDownloader imageDownloader,
+//            IImageAnalyzer imageAnalyzer)
+//            : base(imageDownloader, imageAnalyzer)
+//        {
+//        }
+//
+//        protected override BaseReportModel CreateWaveAnalysisModel()
+//        {
+//            return new WindAlertBenWaveAnalysisModel();
+//        }
     }
 }

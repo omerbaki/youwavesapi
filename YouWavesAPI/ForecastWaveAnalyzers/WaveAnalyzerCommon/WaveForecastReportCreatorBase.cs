@@ -13,7 +13,7 @@ namespace WaveAnalyzerCommon
     public interface IReportCreator
     {    
         Task<BaseReportModel> Create();
-        bool ShouldRun();
+        bool ShouldRun(DateTime now);
     }
 
     public abstract class WaveForecastReportCreatorBase : IReportCreator
@@ -30,7 +30,7 @@ namespace WaveAnalyzerCommon
             var forecastDates = GetForecastDates(waveForecastReportModel);
             foreach (var forecastDate in forecastDates)
             {
-                float waveHeight = await GetWaveHeight(forecastDate);
+                var waveHeight = await GetWaveHeight(forecastDate);
                 waveForecastReportModel.AddWaveTiming(forecastDate, waveHeight);
             }
 
@@ -39,8 +39,8 @@ namespace WaveAnalyzerCommon
 
         protected abstract void SetForecastTimeFrame(WaveForecastReportModel model);
         protected abstract DateTime[] GetForecastDates(WaveForecastReportModel model);
-        protected abstract Task<float> GetWaveHeight(DateTime forecastDate);
+        protected abstract Task<WaveHeight> GetWaveHeight(DateTime forecastDate);
 
-        public abstract bool ShouldRun();
+        public abstract bool ShouldRun(DateTime now);
     }
 }

@@ -9,21 +9,21 @@ using WaveAnalyzerCommon.Model;
 
 namespace LevYamWaveAnalyzer
 {
-    internal abstract class WindAlertWaveAnalyzerBase : WaveForecastReportCreatorBase
+    internal abstract class WindAlertWaveAnalyzerBase //: WaveForecastReportCreatorBase
     {
         private const int HOUR_TO_START = 6;
         private const int HOUR_TO_FINISH = 16;
 
-        public WindAlertWaveAnalyzerBase(IImageDownloader imageDownloader, IImageAnalyzer imageAnalyzer) : 
-            base(imageDownloader, imageAnalyzer)
-        { 
-        }        
-
-        public override bool ShouldRun()
-        {
-            return ((DateTime.Now.Hour >= HOUR_TO_START) &&
-                    (DateTime.Now.Hour < HOUR_TO_FINISH) &&
-                    (DateTime.Now - mLastRunTime).TotalMinutes > 20);
-        }
+//        public WindAlertWaveAnalyzerBase(IImageDownloader imageDownloader, IImageAnalyzer imageAnalyzer) : 
+//            base(imageDownloader, imageAnalyzer)
+//        { 
+//        }        
+//
+//        public override bool ShouldRun()
+//        {
+//            return ((DateTime.Now.Hour >= HOUR_TO_START) &&
+//                    (DateTime.Now.Hour < HOUR_TO_FINISH) &&
+//                    (DateTime.Now - mLastRunTime).TotalMinutes > 20);
+//        }
     }
 }

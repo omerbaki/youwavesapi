@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Logger;
 
 namespace ForecastAnalysisNotificationCreator
 {
@@ -82,7 +83,7 @@ namespace ForecastAnalysisNotificationCreator
 
         private IWaveForecastNotificationCreator GetWaveForecastNotificationCreator(string analysisModel)
         {
-            return mWaveForecastNotificationCreatorFactory.Create(typeof(IsramarWaveAnalysisModel).Name);           
+            return null;// mWaveForecastNotificationCreatorFactory.Create(typeof(IsramarWaveAnalysisModel).Name);           
         }
 
         private string CreateDailyNotificationsDirectory()

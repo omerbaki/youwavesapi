@@ -7,6 +7,7 @@ using Logger;
 using WaveAnalyzerCommon;
 using Framework;
 using System.Threading.Tasks;
+using System;
 
 namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreator
 {
@@ -18,7 +19,7 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreato
         private IStorageAccessor mStorageAccessor;
 
         private ReportsCreator mTarget;
-
+        
         [TestFixtureSetUp]
         public void Setup()
         {
@@ -34,7 +35,7 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreato
         [Test]
         public async Task CreateReports_ReportCreatorShouldNotRun_NoReportCreated()
         {
-            A.CallTo(() => mReportCreator.ShouldRun()).Returns(false);
+            A.CallTo(() => mReportCreator.ShouldRun(DateTime.MinValue)).WithAnyArguments().Returns(false);
 
             await mTarget.CreateReports();
 
@@ -44,12 +45,12 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreato
         [Test]
         public async Task CreateReports_ReportCreatorShouldRun_ReportCreatedAndSaved()
         {
-            A.CallTo(() => mReportCreator.ShouldRun()).Returns(true);
+            A.CallTo(() => mReportCreator.ShouldRun(DateTime.MinValue)).WithAnyArguments().Returns(true);
 
             await mTarget.CreateReports();
 
             A.CallTo(() => mReportCreator.Create()).MustHaveHappened();
-            A.CallTo(() => mStorageAccessor.Save(null)).WithAnyArguments().MustHaveHappened();
+            A.CallTo(() => mStorageAccessor.WriteReport(null)).WithAnyArguments().MustHaveHappened();
         }
     }  
 }

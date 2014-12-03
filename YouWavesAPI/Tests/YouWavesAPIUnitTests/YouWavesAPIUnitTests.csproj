@@ -38,6 +38,7 @@
     <Reference Include="FakeItEasy">
       <HintPath>..\..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="nunit.core">
       <HintPath>..\..\packages\NUnitTestAdapter.1.2\lib\nunit.core.dll</HintPath>
       <Private>False</Private>
@@ -69,13 +70,29 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ForecastWaveAnalyzer\ForecastAnalysisReportCreator\ReportsCreatorTests.cs" />
-    <Compile Include="ForecastWaveAnalyzer\IsramarWaveAnalyzer\IsramarImageAnalyzerTests.cs" />
+    <Compile Include="ForecastWaveAnalyzer\IsramarWaveAnalyzer\IsramarWaveForecastReportCreatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ForecastAnalysisReportCreator\ForecastAnalysisReportCreator.csproj">
       <Project>{6e450b02-e4e8-45fb-9cf3-67cabe8b3f3c}</Project>
       <Name>ForecastAnalysisReportCreator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ForecastNotifications\ForecastAnlysisNotificationCreator\ForecastAnalysisNotificationCreator.csproj">
+      <Project>{1a0b05ac-fa4c-49c1-a87f-6ae51217a7fe}</Project>
+      <Name>ForecastAnalysisNotificationCreator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ForecastNotifications\ForecastNotificaitonEntities\ForecastNotificaitonEntities.csproj">
+      <Project>{c3e1120b-0102-4d44-862e-0c78c8454257}</Project>
+      <Name>ForecastNotificaitonEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ForecastNotifications\ForecastNotificationSender\ForecastNotificationSender.csproj">
+      <Project>{891d89fa-08e3-4ed4-b413-34742bd88c6b}</Project>
+      <Name>ForecastNotificationSender</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisModel.csproj">
+      <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
+      <Name>ForecastAnalysisModel</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ForecastWaveAnalyzers\IsramarWaveAnalyzer\IsramarWaveAnalyzer.csproj">
       <Project>{eadfaf2c-d9b3-430d-85a8-f2df7a0b367a}</Project>
@@ -85,6 +102,10 @@
       <Project>{042d3990-5db5-46eb-8f85-9d0d4a95fa43}</Project>
       <Name>WaveAnalyzerCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ForecastWaveAnalyzers\WindAlertWaveAnalyzer\WindAlertWaveAnalyzer.csproj">
+      <Project>{5b8ec848-d47b-4f84-8792-137d6d8b3dd5}</Project>
+      <Name>WindAlertWaveAnalyzer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Framework\Framework.csproj">
       <Project>{51a6a9ca-9a64-45fb-b649-69b00aebfa15}</Project>
       <Name>Framework</Name>
@@ -92,6 +113,10 @@
     <ProjectReference Include="..\..\Logger\Logger.csproj">
       <Project>{cc99d10c-894b-4e77-90ad-eb9ad0d98b7d}</Project>
       <Name>Logger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\YouWavesAPI\YouWavesAPI.csproj">
+      <Project>{b661093f-c5d3-493b-9c79-378b6ec495d4}</Project>
+      <Name>YouWavesAPI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

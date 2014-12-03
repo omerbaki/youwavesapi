@@ -35,7 +35,7 @@ namespace ForecastAnalysisReportCreator
         {
             foreach (var reportCreator in mReportCreators)
             {
-                if (!reportCreator.ShouldRun()) continue;
+                if (!reportCreator.ShouldRun(DateTime.Now)) continue;
 
                 await CreateReport(reportCreator);
             }

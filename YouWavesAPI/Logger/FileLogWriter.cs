@@ -19,5 +19,10 @@ namespace Logger
                 Directory.CreateDirectory(LOGS_DIRECTORY);
             }
         }
+
+        public Task Log(string severity, string category, string message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

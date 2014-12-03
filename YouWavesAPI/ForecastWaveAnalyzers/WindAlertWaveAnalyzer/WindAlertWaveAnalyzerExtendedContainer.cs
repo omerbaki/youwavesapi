@@ -14,23 +14,23 @@ namespace LevYamWaveAnalyzer
     {
         protected override void Initialize()
         {
-            Container.RegisterType<IImageAnalyzer, WindAlertLevImageAnalyzer>("WindAlertLevImageAnalyzer");
-            Container.RegisterType<IImageDownloader, WindAlertLevImageDownloader>("WindAlertLevImageDownloader");
-
-            Container.RegisterType<IImageAnalyzer, WindAlertBenImageAnalyzer>("WindAlertBenImageAnalyzer");
-            Container.RegisterType<IImageDownloader, WindAlertBenImageDownloader>("WindAlertBenImageDownloader");
-
-            Container.RegisterType<IReportCreator, WindAlertLevWaveAnalyzer>(
-                "LevWaveAnalyzer",
-                new InjectionConstructor(
-                    new ResolvedParameter<IImageDownloader>("WindAlertLevImageDownloader"),
-                    new ResolvedParameter<IImageAnalyzer>("WindAlertLevImageAnalyzer")));
-            
-            Container.RegisterType<IReportCreator, WindAlertBenWaveAnalyzer>(
-                "BenWaveAnalyzer",
-                new InjectionConstructor(
-                    new ResolvedParameter<IImageDownloader>("WindAlertBenImageDownloader"),
-                    new ResolvedParameter<IImageAnalyzer>("WindAlertBenImageAnalyzer")));
+//            Container.RegisterType<IImageAnalyzer, WindAlertLevImageAnalyzer>("WindAlertLevImageAnalyzer");
+//            Container.RegisterType<IImageDownloader, WindAlertLevImageDownloader>("WindAlertLevImageDownloader");
+//
+//            Container.RegisterType<IImageAnalyzer, WindAlertBenImageAnalyzer>("WindAlertBenImageAnalyzer");
+//            Container.RegisterType<IImageDownloader, WindAlertBenImageDownloader>("WindAlertBenImageDownloader");
+//
+//            Container.RegisterType<IReportCreator, WindAlertLevWaveAnalyzer>(
+//                "LevWaveAnalyzer",
+//                new InjectionConstructor(
+//                    new ResolvedParameter<IImageDownloader>("WindAlertLevImageDownloader"),
+//                    new ResolvedParameter<IImageAnalyzer>("WindAlertLevImageAnalyzer")));
+//            
+//            Container.RegisterType<IReportCreator, WindAlertBenWaveAnalyzer>(
+//                "BenWaveAnalyzer",
+//                new InjectionConstructor(
+//                    new ResolvedParameter<IImageDownloader>("WindAlertBenImageDownloader"),
+//                    new ResolvedParameter<IImageAnalyzer>("WindAlertBenImageAnalyzer")));
         }
     }
 }

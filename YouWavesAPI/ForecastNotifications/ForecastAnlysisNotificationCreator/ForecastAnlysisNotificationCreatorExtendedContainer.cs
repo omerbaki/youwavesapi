@@ -16,7 +16,7 @@ namespace ForecastAnalysisNotificationCreator
             Container.RegisterType<IWaveForecastNotificationCreatorFactory, WaveForecastNotificationCreatorFactory>();
             Container.RegisterType<IForecastNotificationCreator, ForecastNotificationCreator>();
 
-            Container.RegisterType<IWaveForecastNotificationCreator, IsramarWaveForecastNotificationCreator>(typeof(IsramarWaveAnalysisModel).Name);
+            //Container.RegisterType<IWaveForecastNotificationCreator, IsramarWaveForecastNotificationCreator>(typeof(IsramarWaveAnalysisModel).Name);
         }
     }
 }

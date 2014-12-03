@@ -10,17 +10,21 @@ namespace Framework
 {
     public interface IStorageAccessor
     {
-        void Save(string directoryName);
-        string[] GetFiles(string directoryName);
-
-        Task<string> WriteReport(object obj);
+        Task WriteReport(object obj);
     }
 
     class StorageAccessor : IStorageAccessor
     {
         public const string IMAGES_FOLDER = @"Images\{0}\{1}";
 
-        public async Task<string> WriteReport(object obj)
+        private readonly IJsonSerializer mJsonSerializer;
+
+        public StorageAccessor(IJsonSerializer jsonSerializer)
+        {
+            mJsonSerializer = jsonSerializer;
+        }
+
+        public async Task WriteReport(object obj)
         {
             string directory = CreateReportDirectory();
             string reportFileName = Path.Combine(directory, obj.GetType().Name + "_" + DateTime.Now.ToString("yyyyMMdd_HHmm") + ".json");

@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using Logger;
 
 namespace YouWavesAPI.Controllers
 {
@@ -37,11 +38,11 @@ namespace YouWavesAPI.Controllers
             await mLogger.Debug("ForecastAnalysisController", "Create Reports");
             await mForecastAnalysisReportCreator.CreateReports();
 
-            await mLogger.Debug("ForecastAnalysisController", "Create Notification");
-            await mForecastNotificationCreator.CreateNotifications();
+//            await mLogger.Debug("ForecastAnalysisController", "Create Notification");
+//            await mForecastNotificationCreator.CreateNotifications();
 
-            await mLogger.Debug("ForecastAnalysisController", "Create Notification");
-            await mForecastNotificationSender.SendNotifications();
+//            await mLogger.Debug("ForecastAnalysisController", "Create Notification");
+//            await mForecastNotificationSender.SendNotifications();
         }        
     }
 }
