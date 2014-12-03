@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WaveAnalyzerCommon
+namespace Framework
 {
-    public class WaveAnalyzerCommonExtendedContainer: UnityContainerExtension
+    public class FrameworkExtendedContainer : UnityContainerExtension
     {
         protected override void Initialize()
         {
-            Container.RegisterType<IEnumerable<IReportCreator>, IReportCreator[]>();
+            Container.RegisterType<IJsonSerializer, JsonSerializer>();
+            Container.RegisterType<IImageDownloader, ImageDownloader>();
         }
     }
 }

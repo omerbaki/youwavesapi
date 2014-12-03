@@ -4,6 +4,7 @@ using ForecastNotificationSender;
 using Framework;
 using IsramarWaveAnalyzer;
 using LevYamWaveAnalyzer;
+using Logger;
 using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace YouWavesAPI
         public static void Register(HttpConfiguration config)
         {
             var container = new UnityContainer();
-            
+
+            container.AddNewExtension<LoggerExtendedContainer>();
             container.AddNewExtension<FrameworkExtendedContainer>();
             container.AddNewExtension<WaveAnalyzerCommonExtendedContainer>();
             container.AddNewExtension<WindAlertWaveAnalyzerExtendedContainer>();

@@ -17,19 +17,19 @@ namespace YouWavesAPI.Controllers
     {
         private readonly ILogger mLogger; 
         private readonly IReportsCreator mForecastAnalysisReportCreator;
-        private readonly IForecastNotificationCreator mForecastNotificationCreator;
-        private readonly IForecastNotificationSender mForecastNotificationSender;
+        //private readonly IForecastNotificationCreator mForecastNotificationCreator;
+        //private readonly IForecastNotificationSender mForecastNotificationSender;
 
         public ForecastAnalysisController(
-            ILogger aLogger, 
-            IReportsCreator forecastAnalysisReportCreator,
-            IForecastNotificationCreator aForecastNotificationCreator,
-            IForecastNotificationSender aForecastNotificationSender)
+            ILogger aLogger)
+//            IReportsCreator forecastAnalysisReportCreator)
+//            IForecastNotificationCreator aForecastNotificationCreator,
+//            IForecastNotificationSender aForecastNotificationSender)
         {
-            mLogger = aLogger;
-            mForecastAnalysisReportCreator = forecastAnalysisReportCreator;
-            mForecastNotificationCreator = aForecastNotificationCreator;
-            mForecastNotificationSender = aForecastNotificationSender;
+//            mLogger = aLogger;
+//            mForecastAnalysisReportCreator = forecastAnalysisReportCreator;
+//            mForecastNotificationCreator = aForecastNotificationCreator;
+//            mForecastNotificationSender = aForecastNotificationSender;
         }
 
         // POST: api/ForecastAnalysis

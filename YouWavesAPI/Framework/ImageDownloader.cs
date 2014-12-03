@@ -1,21 +1,18 @@
-﻿using ForecastAnalysisModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using WaveAnalyzerCommon.Model;
 
-namespace WaveAnalyzerCommon
+namespace Framework
 {
     public interface IImageDownloader
     {
         Task<byte[]> DownloadImage(DownloadImageModel model);
     }
 
-    public abstract class ImageDownloader : IImageDownloader
+    public class ImageDownloader : IImageDownloader
     {
         public async Task<byte[]> DownloadImage(DownloadImageModel imageModel)
         {
@@ -42,5 +39,11 @@ namespace WaveAnalyzerCommon
             var errorResponse = webEx.Response as HttpWebResponse;
             return errorResponse != null && errorResponse.StatusCode == HttpStatusCode.NotFound;
         }
+    }
+
+    public class DownloadImageModel
+    {
+        public string ImageUrl { get; set; }
+        public string ImageName { get; set; }
     }
 }

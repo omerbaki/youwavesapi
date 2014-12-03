@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WaveAnalyzerCommon;
+using Framework;
 
 namespace IsramarWaveAnalyzer
 {
@@ -17,7 +18,7 @@ namespace IsramarWaveAnalyzer
             Container.RegisterType<IReportCreator, IsramarWaveForecastReportCreator>(
                 "IsramarWaveAnalyzer",
                 new InjectionConstructor(
-                    new ResolvedParameter<IImageDownloader>("IsramarImageDownloader"),
+                    new ResolvedParameter<IImageDownloader>(),
                     new ResolvedParameter<IImageAnalyzer>("IsramarImageAnalyzer")));
         }
     }

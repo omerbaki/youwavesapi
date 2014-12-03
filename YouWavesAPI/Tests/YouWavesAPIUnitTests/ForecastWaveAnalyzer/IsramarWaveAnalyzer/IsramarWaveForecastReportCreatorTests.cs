@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using FakeItEasy;
 using ForecastAnalysisModel;
+using Framework;
 using IsramarWaveAnalyzer;
 using NUnit.Framework;
 using WaveAnalyzerCommon;
@@ -74,6 +75,19 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.IsramarWaveAnalyzer
             var waveTimingDates = ((WaveForecastReportModel) waveForecastReportModel).WavesTiming.Count;
 
             Assert.AreEqual(32, waveTimingDates);
+        }
+
+        [Test]
+        public async Task Create_ImageAnalyzerReturnBigWaves_WaveTimingAreBigWaves()
+        {
+            A.CallTo(() => mImageAnalyzer.GetWaveHeight(null)).WithAnyArguments().Returns(WaveHeight.Big);
+
+            var waveForecastReportModel = await mTarget.Create();
+
+            foreach (var waveTiming in ((WaveForecastReportModel) waveForecastReportModel).WavesTiming)
+            {
+                Assert.AreEqual(WaveHeight.Big, waveTiming.Height);
+            }
         }
     }
 }

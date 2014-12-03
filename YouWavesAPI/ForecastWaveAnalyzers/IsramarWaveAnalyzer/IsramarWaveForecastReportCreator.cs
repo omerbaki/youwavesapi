@@ -1,11 +1,9 @@
 ﻿using ForecastAnalysisModel;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WaveAnalyzerCommon;
-using WaveAnalyzerCommon.Model;
+using Framework;
 
 namespace IsramarWaveAnalyzer
 {

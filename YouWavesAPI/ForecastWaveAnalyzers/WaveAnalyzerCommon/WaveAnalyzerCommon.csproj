@@ -49,9 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImageAnalyzer.cs" />
-    <Compile Include="ImageDownloader.cs" />
-    <Compile Include="Model\DownloadImageModel.cs" />
+    <Compile Include="IImageAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WaveForecastReportCreatorBase.cs" />
     <Compile Include="WaveAnalyzerCommonExtendedContainer.cs" />
