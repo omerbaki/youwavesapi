@@ -11,8 +11,8 @@ namespace Logger
     {
         protected override void Initialize()
         {
-//            Container.RegisterType<ILogWriter, FileLogWriter>("FileLogWriter");
-//            Container.RegisterType<ILogWriter, MailLogWriter>("MailLogWriter");
+            Container.RegisterType<ILogWriter, FileLogWriter>("FileLogWriter");
+            Container.RegisterType<ILogWriter, MailLogWriter>("MailLogWriter");
             Container.RegisterType<ILogger, Logger>();
             
         }        
