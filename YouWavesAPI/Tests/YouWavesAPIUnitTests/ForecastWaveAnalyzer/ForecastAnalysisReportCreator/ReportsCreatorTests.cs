@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using ForecastAnalysisReportCreator;
 using FakeItEasy;
-using Logger;
+using LoggerFramework;
 using WaveAnalyzerCommon;
 using Framework;
 using System.Threading.Tasks;

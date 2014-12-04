@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D72C4FDB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YouWavesAPIUnitTests", "Tests\YouWavesAPIUnitTests\YouWavesAPIUnitTests.csproj", "{657CC8A7-FA77-4C1E-A2C9-CC091CD30478}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logger", "Logger\Logger.csproj", "{CC99D10C-894B-4E77-90AD-EB9AD0D98B7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerFramework", "Logger\LoggerFramework.csproj", "{CC99D10C-894B-4E77-90AD-EB9AD0D98B7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

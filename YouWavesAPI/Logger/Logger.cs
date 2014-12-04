@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logger
+namespace LoggerFramework
 {
     public interface ILogger
     {
@@ -13,7 +13,7 @@ namespace Logger
         Task Error(string categry, string message, Exception ex);
     }
 
-    class Logger : ILogger
+    public class Logger : ILogger
     {
         private readonly IEnumerable<ILogWriter> mLogWriters;
 

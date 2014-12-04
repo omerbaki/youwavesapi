@@ -63,9 +63,9 @@
       <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
       <Name>ForecastAnalysisModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Logger\Logger.csproj">
+    <ProjectReference Include="..\..\Logger\LoggerFramework.csproj">
       <Project>{cc99d10c-894b-4e77-90ad-eb9ad0d98b7d}</Project>
-      <Name>Logger</Name>
+      <Name>LoggerFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\ForecastNotificaitonEntities\ForecastNotificaitonEntities.csproj">
       <Project>{c3e1120b-0102-4d44-862e-0c78c8454257}</Project>

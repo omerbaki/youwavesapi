@@ -1,15 +1,8 @@
-﻿using ForecastAnalysisNotificationCreator;
-using ForecastAnalysisReportCreator;
-using ForecastNotificationSender;
-using Framework;
+﻿using ForecastAnalysisReportCreator;
+using LoggerFramework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using Logger;
 
 namespace YouWavesAPI.Controllers
 {
@@ -21,13 +14,13 @@ namespace YouWavesAPI.Controllers
         //private readonly IForecastNotificationSender mForecastNotificationSender;
 
         public ForecastAnalysisController(
-            ILogger aLogger)
-//            IReportsCreator forecastAnalysisReportCreator)
+            ILogger aLogger,
+            IReportsCreator forecastAnalysisReportCreator)
 //            IForecastNotificationCreator aForecastNotificationCreator,
 //            IForecastNotificationSender aForecastNotificationSender)
         {
-//            mLogger = aLogger;
-//            mForecastAnalysisReportCreator = forecastAnalysisReportCreator;
+            mLogger = aLogger;
+            mForecastAnalysisReportCreator = forecastAnalysisReportCreator;
 //            mForecastNotificationCreator = aForecastNotificationCreator;
 //            mForecastNotificationSender = aForecastNotificationSender;
         }

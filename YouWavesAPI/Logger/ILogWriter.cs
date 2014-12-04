@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logger
+namespace LoggerFramework
 {
-    interface ILogWriter
+    public interface ILogWriter
     {
         Task Log(string severity, string category, string message);
     }

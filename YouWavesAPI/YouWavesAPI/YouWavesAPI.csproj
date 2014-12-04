@@ -145,9 +145,9 @@
       <Project>{51a6a9ca-9a64-45fb-b649-69b00aebfa15}</Project>
       <Name>Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Logger\Logger.csproj">
+    <ProjectReference Include="..\Logger\LoggerFramework.csproj">
       <Project>{cc99d10c-894b-4e77-90ad-eb9ad0d98b7d}</Project>
-      <Name>Logger</Name>
+      <Name>LoggerFramework</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -110,9 +110,9 @@
       <Project>{51a6a9ca-9a64-45fb-b649-69b00aebfa15}</Project>
       <Name>Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Logger\Logger.csproj">
+    <ProjectReference Include="..\..\Logger\LoggerFramework.csproj">
       <Project>{cc99d10c-894b-4e77-90ad-eb9ad0d98b7d}</Project>
-      <Name>Logger</Name>
+      <Name>LoggerFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\YouWavesAPI\YouWavesAPI.csproj">
       <Project>{b661093f-c5d3-493b-9c79-378b6ec495d4}</Project>

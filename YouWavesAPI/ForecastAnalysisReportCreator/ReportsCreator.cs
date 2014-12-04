@@ -6,7 +6,7 @@ using Framework;
 using LevYamWaveAnalyzer;
 using WaveAnalyzerCommon;
 using System.Reactive.Linq;
-using Logger;
+using LoggerFramework;
 
 namespace ForecastAnalysisReportCreator
 {

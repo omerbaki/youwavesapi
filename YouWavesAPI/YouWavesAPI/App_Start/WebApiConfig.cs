@@ -1,14 +1,8 @@
-﻿using ForecastAnalysisNotificationCreator;
-using ForecastAnalysisReportCreator;
-using ForecastNotificationSender;
+﻿using ForecastAnalysisReportCreator;
 using Framework;
 using IsramarWaveAnalyzer;
-using LevYamWaveAnalyzer;
-using Logger;
+using LoggerFramework;
 using Microsoft.Practices.Unity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.Http;
 using WaveAnalyzerCommon;
 
@@ -23,11 +17,11 @@ namespace YouWavesAPI
             container.AddNewExtension<LoggerExtendedContainer>();
             container.AddNewExtension<FrameworkExtendedContainer>();
             container.AddNewExtension<WaveAnalyzerCommonExtendedContainer>();
-            container.AddNewExtension<WindAlertWaveAnalyzerExtendedContainer>();
+            //container.AddNewExtension<WindAlertWaveAnalyzerExtendedContainer>();
             container.AddNewExtension<IsramarWaveAnalyzerExtendedContainer>();
             container.AddNewExtension<ReportsCreatorExtendedContainer>();
-            container.AddNewExtension<ForecastAnlysisNotificationCreatorExtendedContainer>();
-            container.AddNewExtension<ForecastNotificationSenderExtendedContainer>();
+            //container.AddNewExtension<ForecastAnlysisNotificationCreatorExtendedContainer>();
+            //container.AddNewExtension<ForecastNotificationSenderExtendedContainer>();
 
             config.DependencyResolver = new UnityResolver(container);            
 

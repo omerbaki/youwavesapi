@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logger
+namespace LoggerFramework
 {
-    class MailLogWriter : ILogWriter
+    public class MailLogWriter : ILogWriter
     {
         public Task Log(string severity, string category, string message)
         {
