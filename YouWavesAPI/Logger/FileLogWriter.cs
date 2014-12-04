@@ -10,7 +10,7 @@ namespace LoggerFramework
     public class FileLogWriter : ILogWriter
     {
         private const string LOGS_DIRECTORY = "Logs";
-        private const string MESSAGE_FORMAT = "[{0}] [{1}] - [{2}] - {3}";
+        private const string MESSAGE_FORMAT = "[{0}] [{1}] - [{2}] - {3} \r\n";
 
         public FileLogWriter()
         {
