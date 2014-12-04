@@ -36,34 +36,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="FakeItEasy">
-      <HintPath>..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>
+      <HintPath>..\..\packages\FakeItEasy.1.25.1\lib\net40\FakeItEasy.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <HintPath>..\..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity.Configuration">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <HintPath>..\..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <HintPath>..\..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="nunit.core">
-      <HintPath>..\packages\NUnitTestAdapter.1.2\lib\nunit.core.dll</HintPath>
+      <HintPath>..\..\packages\NUnitTestAdapter.1.2\lib\nunit.core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="nunit.core.interfaces">
-      <HintPath>..\packages\NUnitTestAdapter.1.2\lib\nunit.core.interfaces.dll</HintPath>
+      <HintPath>..\..\packages\NUnitTestAdapter.1.2\lib\nunit.core.interfaces.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="nunit.util">
-      <HintPath>..\packages\NUnitTestAdapter.1.2\lib\nunit.util.dll</HintPath>
+      <HintPath>..\..\packages\NUnitTestAdapter.1.2\lib\nunit.util.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="NUnit.VisualStudio.TestAdapter">
-      <HintPath>..\packages\NUnitTestAdapter.1.2\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
+      <HintPath>..\..\packages\NUnitTestAdapter.1.2\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -81,64 +81,64 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ForecastWaveAnalyzer\IsramarWaveAnalyzer\IsramarImageAnalyzerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ForecastAnalysisReportCreator\ForecastAnalysisReportCreator.csproj">
+    <ProjectReference Include="..\..\ForecastAnalysisReportCreator\ForecastAnalysisReportCreator.csproj">
       <Project>{6e450b02-e4e8-45fb-9cf3-67cabe8b3f3c}</Project>
       <Name>ForecastAnalysisReportCreator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ForecastNotifications\ForecastAnlysisNotificationCreator\ForecastAnalysisNotificationCreator.csproj">
+    <ProjectReference Include="..\..\ForecastNotifications\ForecastAnlysisNotificationCreator\ForecastAnalysisNotificationCreator.csproj">
       <Project>{1a0b05ac-fa4c-49c1-a87f-6ae51217a7fe}</Project>
       <Name>ForecastAnalysisNotificationCreator</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ForecastNotifications\ForecastNotificaitonEntities\ForecastNotificaitonEntities.csproj">
+    <ProjectReference Include="..\..\ForecastNotifications\ForecastNotificaitonEntities\ForecastNotificaitonEntities.csproj">
       <Project>{c3e1120b-0102-4d44-862e-0c78c8454257}</Project>
       <Name>ForecastNotificaitonEntities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ForecastNotifications\ForecastNotificationSender\ForecastNotificationSender.csproj">
+    <ProjectReference Include="..\..\ForecastNotifications\ForecastNotificationSender\ForecastNotificationSender.csproj">
       <Project>{891d89fa-08e3-4ed4-b413-34742bd88c6b}</Project>
       <Name>ForecastNotificationSender</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisModel.csproj">
+    <ProjectReference Include="..\..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisModel.csproj">
       <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
       <Name>ForecastAnalysisModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ForecastWaveAnalyzers\IsramarWaveAnalyzer\IsramarWaveAnalyzer.csproj">
+    <ProjectReference Include="..\..\ForecastWaveAnalyzers\IsramarWaveAnalyzer\IsramarWaveAnalyzer.csproj">
       <Project>{eadfaf2c-d9b3-430d-85a8-f2df7a0b367a}</Project>
       <Name>IsramarWaveAnalyzer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ForecastWaveAnalyzers\WaveAnalyzerCommon\WaveAnalyzerCommon.csproj">
+    <ProjectReference Include="..\..\ForecastWaveAnalyzers\WaveAnalyzerCommon\WaveAnalyzerCommon.csproj">
       <Project>{042d3990-5db5-46eb-8f85-9d0d4a95fa43}</Project>
       <Name>WaveAnalyzerCommon</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ForecastWaveAnalyzers\WindAlertWaveAnalyzer\WindAlertWaveAnalyzer.csproj">
+    <ProjectReference Include="..\..\ForecastWaveAnalyzers\WindAlertWaveAnalyzer\WindAlertWaveAnalyzer.csproj">
       <Project>{5b8ec848-d47b-4f84-8792-137d6d8b3dd5}</Project>
       <Name>WindAlertWaveAnalyzer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Framework\Framework.csproj">
+    <ProjectReference Include="..\..\Framework\Framework.csproj">
       <Project>{51a6a9ca-9a64-45fb-b649-69b00aebfa15}</Project>
       <Name>Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Logger\LoggerFramework.csproj">
+    <ProjectReference Include="..\..\Logger\LoggerFramework.csproj">
       <Project>{cc99d10c-894b-4e77-90ad-eb9ad0d98b7d}</Project>
       <Name>LoggerFramework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tests\YouWavesAPIUnitTests\YouWavesAPIUnitTests.csproj">
+    <ProjectReference Include="..\YouWavesAPIUnitTests\YouWavesAPIUnitTests.csproj">
       <Project>{657cc8a7-fa77-4c1e-a2c9-cc091cd30478}</Project>
       <Name>YouWavesAPIUnitTests</Name>
     </ProjectReference>
-    <ProjectReference Include="..\YouWavesAPI\YouWavesAPI.csproj">
+    <ProjectReference Include="..\..\YouWavesAPI\YouWavesAPI.csproj">
       <Project>{b661093f-c5d3-493b-9c79-378b6ec495d4}</Project>
       <Name>YouWavesAPI</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ForecastWaveAnalyzer\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
