@@ -81,7 +81,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ForecastWaveAnalyzer\IsramarWaveAnalyzer\IsramarImageAnalyzerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -74,6 +74,7 @@ namespace IsramarWaveAnalyzer
                 return WaveHeight.Small;
             }
             else if ((color.R == 123 && color.G == 241 && color.B == 123) ||
+                     (color.R == 152 && color.G == 255 && color.B == 152) ||
                      (color.R == 93 && color.G == 230 && color.B == 97) ||
                      (color.R == 55 && color.G == 217 && color.B == 67))
             {
