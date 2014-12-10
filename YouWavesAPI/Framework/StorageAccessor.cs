@@ -35,7 +35,7 @@ namespace Framework
         private string CreateReportDirectory(T t)
         {
             var storageAttribute = (StorageAttribute)Attribute.GetCustomAttribute(t.GetType(), typeof(StorageAttribute));
-            string directory = Path.Combine("Reports", storageAttribute.Name);
+            string directory = Path.Combine("Reports", storageAttribute.Name, DateTime.Now.ToString("yyyyMMdd"));
 
             if (!Directory.Exists(directory))
             {
