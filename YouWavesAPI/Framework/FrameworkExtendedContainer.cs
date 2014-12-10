@@ -12,8 +12,7 @@ namespace Framework
         protected override void Initialize()
         {
             Container.RegisterType<IJsonSerializer, JsonSerializer>();
-            Container.RegisterType<IImageDownloader, ImageDownloader>();
-            Container.RegisterType<IStorageAccessor, StorageAccessor>();
+            Container.RegisterType<IImageDownloader, ImageDownloader>();           
         }
     }
 }

@@ -7,6 +7,7 @@ using LevYamWaveAnalyzer;
 using WaveAnalyzerCommon;
 using System.Reactive.Linq;
 using LoggerFramework;
+using ForecastAnalysisModel;
 
 namespace ForecastAnalysisReportCreator
 {
@@ -18,17 +19,14 @@ namespace ForecastAnalysisReportCreator
     public class ReportsCreator : IReportsCreator
     {
         private readonly ILogger mLogger; 
-        private readonly IEnumerable<IReportCreator> mReportCreators;
-        private readonly IStorageAccessor mStorageAccessor;
+        private readonly IEnumerable<IReportCreator> mReportCreators;        
 
         public ReportsCreator(
             ILogger aLogger, 
-            IEnumerable<IReportCreator> aReportCreators,
-            IStorageAccessor aStorageAccessor)
+            IEnumerable<IReportCreator> aReportCreators)
         {
             mLogger = aLogger;
-            mReportCreators = aReportCreators;
-            mStorageAccessor = aStorageAccessor;
+            mReportCreators = aReportCreators;            
         }
 
         public async Task CreateReports()
@@ -47,10 +45,7 @@ namespace ForecastAnalysisReportCreator
             try
             {
                 await mLogger.Debug(typeof(ReportsCreator).Name, "Create Report " + reportCreator.GetType().Name);
-
-                var createdReport = await reportCreator.Create();
-
-                await mStorageAccessor.WriteReport(createdReport);
+                await reportCreator.Create();                
             }
             catch (Exception ex)
             {

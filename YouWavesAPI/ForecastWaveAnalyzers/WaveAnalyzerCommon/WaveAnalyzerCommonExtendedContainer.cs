@@ -1,4 +1,6 @@
-﻿using Microsoft.Practices.Unity;
+﻿using ForecastAnalysisModel;
+using Framework;
+using Microsoft.Practices.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace WaveAnalyzerCommon
         protected override void Initialize()
         {
             Container.RegisterType<IEnumerable<IReportCreator>, IReportCreator[]>();
+            Container.RegisterType<IStorageAccessor<WaveForecastReportModel>, StorageAccessor<WaveForecastReportModel>>();
         }
     }
 }

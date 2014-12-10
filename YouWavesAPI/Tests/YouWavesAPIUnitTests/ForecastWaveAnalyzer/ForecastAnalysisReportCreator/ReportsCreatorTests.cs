@@ -15,8 +15,7 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreato
     class ReportsCreatorTests
     {
         private ILogger mLogger;
-        private IReportCreator mReportCreator;
-        private IStorageAccessor mStorageAccessor;
+        private IReportCreator mReportCreator;       
 
         private ReportsCreator mTarget;
         
@@ -24,12 +23,11 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreato
         public void Setup()
         {
             mLogger = A.Fake<ILogger>();
-            mReportCreator = A.Fake<IReportCreator>();
-            mStorageAccessor = A.Fake<IStorageAccessor>();
+            mReportCreator = A.Fake<IReportCreator>();         
 
             var reportCreators = new List<IReportCreator> {mReportCreator};
 
-            mTarget = new ReportsCreator(mLogger, reportCreators, mStorageAccessor);
+            mTarget = new ReportsCreator(mLogger, reportCreators);
         }
 
         [Test]
@@ -49,8 +47,7 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.ForecastAnalysisReportCreato
 
             await mTarget.CreateReports();
 
-            A.CallTo(() => mReportCreator.Create()).MustHaveHappened();
-            A.CallTo(() => mStorageAccessor.WriteReport(null)).WithAnyArguments().MustHaveHappened();
+            A.CallTo(() => mReportCreator.Create()).MustHaveHappened();           
         }
     }  
 }

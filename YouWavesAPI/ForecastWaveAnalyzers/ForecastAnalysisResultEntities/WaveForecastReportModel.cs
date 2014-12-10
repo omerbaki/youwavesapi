@@ -14,14 +14,17 @@ namespace ForecastAnalysisModel
         Big
     }
 
+    [Storage("WaveForecastReport")]
     public class WaveForecastReportModel : BaseReportModel
     {
+        public string Source { get; set; }
         public DateTime ForecastStartDate { get; set; }
         public DateTime ForecastEndDate { get; set; }
         public List<WavesTiming> WavesTiming { get; set; }
 
-        public WaveForecastReportModel()
+        public WaveForecastReportModel(string source)
         {
+            this.Source = source;
             this.WavesTiming = new List<WavesTiming>();
         }
 

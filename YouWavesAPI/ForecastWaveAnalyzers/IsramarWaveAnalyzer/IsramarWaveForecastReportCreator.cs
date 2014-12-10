@@ -18,7 +18,8 @@ namespace IsramarWaveAnalyzer
 
         public IsramarWaveForecastReportCreator(
             IImageDownloader imageDownloader,
-            IImageAnalyzer imageAnalyzer)
+            IImageAnalyzer imageAnalyzer, 
+            IStorageAccessor<WaveForecastReportModel> aStorageAccessor) : base(aStorageAccessor)
         {
             mImageDownloader = imageDownloader;
             mImageAnalyzer = imageAnalyzer;

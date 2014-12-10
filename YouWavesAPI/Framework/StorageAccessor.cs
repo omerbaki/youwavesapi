@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ForecastAnalysisModel;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace Framework
         Task<T> Read();
     }
 
-    class StorageAccessor<T> : IStorageAccessor<T>
+    public class StorageAccessor<T> : IStorageAccessor<T>
     {
         private readonly IJsonSerializer mJsonSerializer;
 
@@ -19,11 +20,11 @@ namespace Framework
             mJsonSerializer = jsonSerializer;
         }
 
-        public async Task Write(T obj)
+        public async Task Write(T t)
         {
-            string directory = CreateReportDirectory();
-            string reportFileName = Path.Combine(directory, obj.GetType().Name + "_" + DateTime.Now.ToString("yyyyMMdd_HHmm") + ".json");
-            await mJsonSerializer.Export(reportFileName, obj);
+            string directory = CreateReportDirectory(t);
+            string reportFileName = Path.Combine(directory, DateTime.Now.ToString("yyyyMMdd_HHmm") + ".json");
+            await mJsonSerializer.Export(reportFileName, t);
         }
 
         public Task<T> Read()
@@ -31,9 +32,10 @@ namespace Framework
             throw new NotImplementedException();
         }
 
-        private string CreateReportDirectory()
+        private string CreateReportDirectory(T t)
         {
-            string directory = Path.Combine("Reports", DateTime.Now.ToString("yyyyMMdd_HHmm"));
+            var storageAttribute = (StorageAttribute)Attribute.GetCustomAttribute(t.GetType(), typeof(StorageAttribute));
+            string directory = Path.Combine("Reports", storageAttribute.Name);
 
             if (!Directory.Exists(directory))
             {

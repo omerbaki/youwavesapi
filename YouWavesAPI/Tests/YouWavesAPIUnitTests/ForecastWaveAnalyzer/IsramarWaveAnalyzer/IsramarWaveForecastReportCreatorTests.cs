@@ -15,19 +15,21 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.IsramarWaveAnalyzer
         private IsramarWaveForecastReportCreator mTarget;
         private IImageDownloader mImageDownloader;
         private IImageAnalyzer mImageAnalyzer;
+        private IStorageAccessor<WaveForecastReportModel> mStorageAccessor;
 
         [TestFixtureSetUp]
         public void TestFixtureSetup()
         {
             mImageDownloader = A.Fake<IImageDownloader>();
             mImageAnalyzer = A.Fake<IImageAnalyzer>();
+            mStorageAccessor = A.Fake<IStorageAccessor<WaveForecastReportModel>>();
         }
 
         [SetUp]
         public void TestSetup()
         {
             // Create new target for every test
-            mTarget = new IsramarWaveForecastReportCreator(mImageDownloader, mImageAnalyzer);            
+            mTarget = new IsramarWaveForecastReportCreator(mImageDownloader, mImageAnalyzer, mStorageAccessor);            
         }
 
         [Test]
@@ -56,38 +58,9 @@ namespace YouWavesAPIUnitTests.ForecastWaveAnalyzer.IsramarWaveAnalyzer
         [Test]
         public async Task Create_DefaultForecastTimeIsSet_DurationIs4DaysFromToday()
         {
-            var waveForecastReportModel = await mTarget.Create();
-            
-            Assert.IsTrue(waveForecastReportModel is WaveForecastReportModel);
+            await mTarget.Create();
 
-            Assert.IsTrue(((WaveForecastReportModel) waveForecastReportModel).ForecastStartDate ==
-                          DateTime.Today.AddDays(1));
-
-            Assert.IsTrue(((WaveForecastReportModel) waveForecastReportModel).ForecastEndDate ==
-                          DateTime.Today.AddDays(5));
-        }
-
-        [Test]
-        public async Task Create_DefaultWaveTimingListCreated_CountEquals32()
-        {
-            var waveForecastReportModel = await mTarget.Create();
-
-            var waveTimingDates = ((WaveForecastReportModel) waveForecastReportModel).WavesTiming.Count;
-
-            Assert.AreEqual(32, waveTimingDates);
-        }
-
-        [Test]
-        public async Task Create_ImageAnalyzerReturnBigWaves_WaveTimingAreBigWaves()
-        {
-            A.CallTo(() => mImageAnalyzer.GetWaveHeight(null)).WithAnyArguments().Returns(WaveHeight.Big);
-
-            var waveForecastReportModel = await mTarget.Create();
-
-            foreach (var waveTiming in ((WaveForecastReportModel) waveForecastReportModel).WavesTiming)
-            {
-                Assert.AreEqual(WaveHeight.Big, waveTiming.Height);
-            }
-        }
+            A.CallTo(() => mStorageAccessor.Write(null)).WithAnyArguments().MustHaveHappened();     
+        }      
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WaveAnalyzerCommon;
 using Framework;
+using ForecastAnalysisModel;
 
 namespace IsramarWaveAnalyzer
 {
@@ -15,11 +16,15 @@ namespace IsramarWaveAnalyzer
         {
             Container.RegisterType<IImageAnalyzer, IsramarImageAnalyzer>("IsramarImageAnalyzer");
 
+            var imageDownloader = Container.Resolve<ResolvedParameter<IImageDownloader>>();
+            var storageAccessor = Container.Resolve<IStorageAccessor<WaveForecastReportModel>>();
+
             Container.RegisterType<IReportCreator, IsramarWaveForecastReportCreator>(
                 "IsramarWaveAnalyzer",
                 new InjectionConstructor(
-                    new ResolvedParameter<IImageDownloader>(),
-                    new ResolvedParameter<IImageAnalyzer>("IsramarImageAnalyzer")));
+                    imageDownloader,
+                    new ResolvedParameter<IImageAnalyzer>("IsramarImageAnalyzer"),
+                    storageAccessor));
         }
     }
 }
