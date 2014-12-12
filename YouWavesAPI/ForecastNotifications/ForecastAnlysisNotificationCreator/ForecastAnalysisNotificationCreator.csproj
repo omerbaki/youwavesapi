@@ -52,16 +52,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ForecastAnlysisNotificationCreatorExtendedContainer.cs" />
-    <Compile Include="WaveForecastNotificationCreator.cs" />
+    <Compile Include="INotificationCreator.cs" />
+    <Compile Include="NotificationsCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WaveForecastNotificationCreators\IsramarWaveForecastNotificationCreator.cs" />
-    <Compile Include="WaveForecastNotificationCreators\IWaveForecastNotificationCreator.cs" />
-    <Compile Include="WaveForecastNotificationCreators\WaveForecastNotificationCreatorFactory.cs" />
+    <Compile Include="WaveForecastNotificationCreators\WaveForecastNotificationCreator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisModel.csproj">
+    <ProjectReference Include="..\..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisEntities.csproj">
       <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
-      <Name>ForecastAnalysisModel</Name>
+      <Name>ForecastAnalysisEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Logger\LoggerFramework.csproj">
       <Project>{cc99d10c-894b-4e77-90ad-eb9ad0d98b7d}</Project>

@@ -125,9 +125,9 @@
       <Project>{891d89fa-08e3-4ed4-b413-34742bd88c6b}</Project>
       <Name>ForecastNotificationSender</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisModel.csproj">
+    <ProjectReference Include="..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisEntities.csproj">
       <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
-      <Name>ForecastAnalysisModel</Name>
+      <Name>ForecastAnalysisEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\ForecastWaveAnalyzers\IsramarWaveAnalyzer\IsramarWaveAnalyzer.csproj">
       <Project>{eadfaf2c-d9b3-430d-85a8-f2df7a0b367a}</Project>

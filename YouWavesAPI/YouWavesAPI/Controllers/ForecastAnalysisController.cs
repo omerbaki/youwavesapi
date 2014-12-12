@@ -1,4 +1,5 @@
-﻿using ForecastAnalysisReportCreator;
+﻿using ForecastAnalysisNotificationCreator;
+using ForecastAnalysisReportCreator;
 using LoggerFramework;
 using System;
 using System.Threading.Tasks;
@@ -10,18 +11,18 @@ namespace YouWavesAPI.Controllers
     {
         private readonly ILogger mLogger; 
         private readonly IReportsCreator mForecastAnalysisReportCreator;
-        //private readonly IForecastNotificationCreator mForecastNotificationCreator;
+        private readonly INotificationsCreator mForecastNotificationCreator;
         //private readonly IForecastNotificationSender mForecastNotificationSender;
 
         public ForecastAnalysisController(
             ILogger aLogger,
-            IReportsCreator forecastAnalysisReportCreator)
-//            IForecastNotificationCreator aForecastNotificationCreator,
+            IReportsCreator forecastAnalysisReportCreator,
+            INotificationsCreator aForecastNotificationCreator)
 //            IForecastNotificationSender aForecastNotificationSender)
         {
             mLogger = aLogger;
             mForecastAnalysisReportCreator = forecastAnalysisReportCreator;
-//            mForecastNotificationCreator = aForecastNotificationCreator;
+            mForecastNotificationCreator = aForecastNotificationCreator;
 //            mForecastNotificationSender = aForecastNotificationSender;
         }
 
@@ -31,8 +32,8 @@ namespace YouWavesAPI.Controllers
             await mLogger.Debug("ForecastAnalysisController", "Create Reports");
             await mForecastAnalysisReportCreator.CreateReports();
 
-//            await mLogger.Debug("ForecastAnalysisController", "Create Notification");
-//            await mForecastNotificationCreator.CreateNotifications();
+            await mLogger.Debug("ForecastAnalysisController", "Create Notification");
+            await mForecastNotificationCreator.CreateNotifications();
 
 //            await mLogger.Debug("ForecastAnalysisController", "Create Notification");
 //            await mForecastNotificationSender.SendNotifications();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using FakeItEasy;
-using ForecastAnalysisModel;
+using ForecastAnalysisEntities;
 using Framework;
 using IsramarWaveAnalyzer;
 using NUnit.Framework;

@@ -59,9 +59,9 @@
       <Project>{51a6a9ca-9a64-45fb-b649-69b00aebfa15}</Project>
       <Name>Framework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ForecastAnalysisResultEntities\ForecastAnalysisModel.csproj">
+    <ProjectReference Include="..\ForecastAnalysisResultEntities\ForecastAnalysisEntities.csproj">
       <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
-      <Name>ForecastAnalysisModel</Name>
+      <Name>ForecastAnalysisEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\WaveAnalyzerCommon\WaveAnalyzerCommon.csproj">
       <Project>{042d3990-5db5-46eb-8f85-9d0d4a95fa43}</Project>

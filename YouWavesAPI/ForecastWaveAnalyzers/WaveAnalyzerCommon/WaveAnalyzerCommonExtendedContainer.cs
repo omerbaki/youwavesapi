@@ -1,4 +1,4 @@
-﻿using ForecastAnalysisModel;
+﻿using ForecastAnalysisEntities;
 using Framework;
 using Microsoft.Practices.Unity;
 using System;

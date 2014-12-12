@@ -1,4 +1,4 @@
-﻿using ForecastAnalysisModel;
+﻿using ForecastAnalysisEntities;
 
 namespace WaveAnalyzerCommon
 {

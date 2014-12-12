@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WaveAnalyzerCommon;
 using Framework;
-using ForecastAnalysisModel;
+using ForecastAnalysisEntities;
 
 namespace IsramarWaveAnalyzer
 {

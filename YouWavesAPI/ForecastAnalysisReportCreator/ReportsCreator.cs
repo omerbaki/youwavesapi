@@ -7,7 +7,7 @@ using LevYamWaveAnalyzer;
 using WaveAnalyzerCommon;
 using System.Reactive.Linq;
 using LoggerFramework;
-using ForecastAnalysisModel;
+using ForecastAnalysisEntities;
 
 namespace ForecastAnalysisReportCreator
 {

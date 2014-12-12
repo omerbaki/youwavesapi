@@ -65,9 +65,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisModel.csproj">
+    <ProjectReference Include="..\ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisEntities.csproj">
       <Project>{b775f481-1b0d-4f39-9095-a59b994a23d4}</Project>
-      <Name>ForecastAnalysisModel</Name>
+      <Name>ForecastAnalysisEntities</Name>
     </ProjectReference>
     <ProjectReference Include="..\Framework\Framework.csproj">
       <Project>{51a6a9ca-9a64-45fb-b649-69b00aebfa15}</Project>

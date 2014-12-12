@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Fram
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ForecastAnalyzers", "ForecastAnalyzers", "{256675B7-8C5E-41E9-84D3-07B4CAC39EC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForecastAnalysisModel", "ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisModel.csproj", "{B775F481-1B0D-4F39-9095-A59B994A23D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ForecastAnalysisEntities", "ForecastWaveAnalyzers\ForecastAnalysisResultEntities\ForecastAnalysisEntities.csproj", "{B775F481-1B0D-4F39-9095-A59B994A23D4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IsramarWaveAnalyzer", "ForecastWaveAnalyzers\IsramarWaveAnalyzer\IsramarWaveAnalyzer.csproj", "{EADFAF2C-D9B3-430D-85A8-F2DF7A0B367A}"
 EndProject

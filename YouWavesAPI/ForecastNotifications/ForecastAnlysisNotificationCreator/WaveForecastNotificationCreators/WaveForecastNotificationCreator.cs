@@ -1,4 +1,4 @@
-﻿using ForecastAnalysisModel;
+﻿using ForecastAnalysisEntities;
 using ForecastNotificaitonEntities;
 using Framework;
 using System;
@@ -10,16 +10,23 @@ using System.Threading.Tasks;
 
 namespace ForecastAnalysisNotificationCreator.WaveForecastNotificationCreators
 {
-    class IsramarWaveForecastNotificationCreator: IWaveForecastNotificationCreator
+    public interface IWaveForecastNotificationCreator
+    {
+        Task UpdateWaveForecastNotification(
+            string reportsDirectory,
+            string notificationsDirectory);
+    }
+
+    class WaveForecastNotificationCreator: IWaveForecastNotificationCreator
     {
         private IJsonSerializer mJsonSerializer;
 
-        public IsramarWaveForecastNotificationCreator(IJsonSerializer jsonSerializer)
+        public WaveForecastNotificationCreator(IJsonSerializer jsonSerializer)
         {
             mJsonSerializer = jsonSerializer;
         }
 
-        public async Task UpdateWaveForecastNotification(string reportsDirectory, string notificationsDirectory)
+        public async Task CreateNotification(string reportsDirectory, string notificationsDirectory)
         {
 //            string reportFileName = CreateWaveForecastNotificationFileName(notificationsDirectory);
 //            var waveForecastNotification = await GetWaveForecastNotificationModel(reportFileName, notificationsDirectory);

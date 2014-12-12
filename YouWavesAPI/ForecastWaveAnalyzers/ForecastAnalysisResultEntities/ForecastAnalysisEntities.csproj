@@ -7,8 +7,8 @@
     <ProjectGuid>{B775F481-1B0D-4F39-9095-A59B994A23D4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ForecastAnalysisModel</RootNamespace>
-    <AssemblyName>ForecastAnalysisModel</AssemblyName>
+    <RootNamespace>ForecastAnalysisEntities</RootNamespace>
+    <AssemblyName>ForecastAnalysisEntities</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
