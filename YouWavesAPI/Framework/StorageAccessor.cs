@@ -1,5 +1,6 @@
 ﻿using ForecastAnalysisEntities;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -8,7 +9,7 @@ namespace Framework
     public interface IStorageAccessor<T>
     {
         Task Write(T obj);
-        Task<T> Read();
+        Task<IEnumerable<T>> ReadAllReports(DateTime day);
     }
 
     public class StorageAccessor<T> : IStorageAccessor<T>
@@ -27,15 +28,22 @@ namespace Framework
             await mJsonSerializer.Export(reportFileName, t);
         }
 
-        public Task<T> Read()
+        public async Task<IEnumerable<T>> ReadAllReports(DateTime day)
         {
-            throw new NotImplementedException();
+            var list = new List<T>();
+            string directory = GetDirectoryName(day);
+            foreach(string fileName in Directory.GetFiles(directory))
+            {
+                T t = (T) await mJsonSerializer.Import(fileName, typeof(T));
+                list.Add(t);
+            }
+
+            return list;
         }
 
         private string CreateReportDirectory(T t)
         {
-            var storageAttribute = (StorageAttribute)Attribute.GetCustomAttribute(t.GetType(), typeof(StorageAttribute));
-            string directory = Path.Combine("Reports", storageAttribute.Name, DateTime.Now.ToString("yyyyMMdd"));
+            string directory = GetDirectoryName(DateTime.Now);
 
             if (!Directory.Exists(directory))
             {
@@ -43,6 +51,12 @@ namespace Framework
             }
 
             return directory;
+        }
+
+        private string GetDirectoryName(DateTime aDay)
+        {            
+            var storageAttribute = (StorageAttribute)Attribute.GetCustomAttribute(typeof(T), typeof(StorageAttribute));
+            return Path.Combine("Reports", storageAttribute.Name, aDay.ToString("yyyyMMdd"));
         }
     }
 }

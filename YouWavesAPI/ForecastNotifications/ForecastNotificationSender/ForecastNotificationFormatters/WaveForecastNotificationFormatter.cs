@@ -9,13 +9,11 @@ using System.Threading.Tasks;
 
 namespace ForecastNotificationSender.ForecastNotificationFormatters
 {
-    class WaveForecastNotificationFormatter : IForecastNotificationFormatter
+    class WaveForecastComparisonNotificationFormatter : IForecastNotificationFormatter
     {
-        private IJsonSerializer mJsonSerializer;
-
-        public WaveForecastNotificationFormatter(IJsonSerializer jsonSerializer)
+        public WaveForecastComparisonNotificationFormatter()
         {
-            mJsonSerializer = jsonSerializer;
+      
         }
 
         public async Task<EmailModel> GetEmailFormat()

@@ -14,6 +14,7 @@ namespace ForecastAnalysisNotificationCreator
         protected override void Initialize()
         {
             Container.RegisterType<INotificationsCreator, NotificationsCreator>();
+            Container.RegisterType<INotificationCreator, WaveForecastComparisonNotificationCreator>("WaveForecastComparisonNotificationCreator");
 
             //Container.RegisterType<IWaveForecastNotificationCreator, IsramarWaveForecastNotificationCreator>(typeof(IsramarWaveAnalysisModel).Name);
         }

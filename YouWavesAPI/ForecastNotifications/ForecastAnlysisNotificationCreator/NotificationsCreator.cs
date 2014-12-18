@@ -21,11 +21,14 @@ namespace ForecastAnalysisNotificationCreator
 
     public class NotificationsCreator : INotificationsCreator
     {
+        private readonly ILogger mLogger;
         private readonly IEnumerable<INotificationCreator> mNotificationCreators; 
 
         public NotificationsCreator(
+            ILogger aLogger,
             IEnumerable<INotificationCreator> aNotificationCreators)
-        {           
+        {
+            mLogger = aLogger;
             mNotificationCreators = aNotificationCreators;
         }
 
@@ -33,7 +36,23 @@ namespace ForecastAnalysisNotificationCreator
         {
             foreach (var notificationCreator in mNotificationCreators)
             {
-                await notificationCreator.Create();
+                Exception thrownEx = null;
+
+                try
+                {
+                    await notificationCreator.Create();
+                }
+                catch (Exception ex)
+                {
+                    thrownEx = ex;
+                }
+
+                if (thrownEx != null)
+                {
+                    await mLogger.Error(notificationCreator.GetType().Name, "Failed to create notification", thrownEx);
+                    thrownEx = null;
+                }
+
             }              
         }
     }
